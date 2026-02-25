@@ -1,9 +1,10 @@
 package io.github.jtpadilla.example.interactions.demo.researchagentstreaming;
+
 import io.github.glaforge.gemini.interactions.GeminiInteractionsClient;
 import io.github.glaforge.gemini.interactions.model.Config.DeepResearchAgentConfig;
 import io.github.glaforge.gemini.interactions.model.Config.ThinkingSummaries;
-import io.github.glaforge.gemini.interactions.model.Events;
 import io.github.glaforge.gemini.interactions.model.Content;
+import io.github.glaforge.gemini.interactions.model.Events;
 import io.github.glaforge.gemini.interactions.model.InteractionParams.AgentInteractionParams;
 import io.github.glaforge.gemini.interactions.model.Tool.GoogleSearch;
 

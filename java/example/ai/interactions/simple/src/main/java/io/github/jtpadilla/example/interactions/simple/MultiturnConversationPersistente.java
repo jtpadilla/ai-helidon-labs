@@ -1,9 +1,9 @@
 package io.github.jtpadilla.example.interactions.simple;
 
-import io.github.jtpadilla.example.interactions.util.Util;
 import io.github.glaforge.gemini.interactions.GeminiInteractionsClient;
 import io.github.glaforge.gemini.interactions.model.Interaction;
 import io.github.glaforge.gemini.interactions.model.InteractionParams;
+import io.github.jtpadilla.example.interactions.util.Util;
 
 class MultiturnConversationPersistente {
 

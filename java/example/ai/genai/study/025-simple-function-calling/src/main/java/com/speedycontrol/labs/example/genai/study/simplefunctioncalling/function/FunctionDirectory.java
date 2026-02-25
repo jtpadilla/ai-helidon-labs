@@ -2,9 +2,9 @@ package com.speedycontrol.labs.example.genai.study.simplefunctioncalling.functio
 
 import com.google.genai.types.FunctionCall;
 import com.google.genai.types.Tool;
-import io.github.jtpadilla.gcloud.genai.function.FunctionGatewayException;
 import com.speedycontrol.labs.example.genai.study.simplefunctioncalling.function.impl.CalculateRentangleAreaDef;
 import com.speedycontrol.labs.example.genai.study.simplefunctioncalling.function.impl.CalculateRentangleAreaImpl;
+import io.github.jtpadilla.gcloud.genai.function.FunctionGatewayException;
 
 import java.util.HashMap;
 import java.util.Map;

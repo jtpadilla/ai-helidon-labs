@@ -7,8 +7,7 @@ import com.digitalpetri.enip.cip.epath.EPath;
 import com.digitalpetri.enip.cip.epath.LogicalSegment;
 import com.digitalpetri.enip.cip.epath.PortSegment;
 import com.digitalpetri.enip.cip.services.GetAttributeListService;
-import com.digitalpetri.enip.cip.structs.AttributeResponse; // <-- NUEVO
-
+import com.digitalpetri.enip.cip.structs.AttributeResponse;
 import io.netty.buffer.ByteBuf;
 import io.netty.util.ReferenceCountUtil;
 

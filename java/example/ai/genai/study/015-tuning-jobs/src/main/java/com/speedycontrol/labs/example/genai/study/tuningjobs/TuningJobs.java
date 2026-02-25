@@ -4,8 +4,8 @@ import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.TuningDataset;
 import com.google.genai.types.TuningJob;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 // La primera ejecucion ha dado como resultado: projects/176809830110/locations/europe-southwest1/models/2132920616490106880@1
 

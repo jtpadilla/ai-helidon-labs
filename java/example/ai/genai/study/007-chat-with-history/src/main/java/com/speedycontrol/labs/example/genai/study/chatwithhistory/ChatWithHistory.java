@@ -5,8 +5,8 @@ import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.Content;
 import com.google.genai.types.GenerateContentResponse;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 import java.util.List;
 

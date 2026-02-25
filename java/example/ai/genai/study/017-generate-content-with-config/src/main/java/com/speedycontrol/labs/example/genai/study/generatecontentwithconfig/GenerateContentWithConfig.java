@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.*;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 public class GenerateContentWithConfig {
 

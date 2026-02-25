@@ -20,10 +20,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.glaforge.gemini.schema.Schema;
 
-import static io.github.glaforge.gemini.schema.GSchema.fromJson;
-
 import java.util.List;
 import java.util.Map;
+
+import static io.github.glaforge.gemini.schema.GSchema.fromJson;
 
 /**
  * Request parameters for creating interactions.

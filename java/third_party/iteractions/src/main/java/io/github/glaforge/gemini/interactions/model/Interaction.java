@@ -18,8 +18,9 @@ package io.github.glaforge.gemini.interactions.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
+
 import java.time.Instant;
+import java.util.List;
 
 /**
  * Represents the Interaction resource.

@@ -6,11 +6,10 @@ import com.digitalpetri.enip.cip.CipClient;
 import com.digitalpetri.enip.cip.epath.EPath;
 import com.digitalpetri.enip.cip.epath.LogicalSegment;
 import com.digitalpetri.enip.cip.epath.PortSegment;
-
-import com.digitalpetri.enip.cip.services.ForwardOpenService; // Clase Service
+import com.digitalpetri.enip.cip.services.ForwardOpenService;
+import com.digitalpetri.enip.cip.structs.ForwardOpenRequest;
 import com.digitalpetri.enip.cip.structs.ForwardOpenResponse;
-import com.digitalpetri.enip.cip.structs.NetworkConnectionParameters; // Estructuras de conexión
-import com.digitalpetri.enip.cip.structs.ForwardOpenRequest; // Petición de Contrato
+import com.digitalpetri.enip.cip.structs.NetworkConnectionParameters;
 
 import java.time.Duration;
 import java.util.Random;

@@ -3,6 +3,7 @@ package io.github.jtpadilla.example.interactions.simple;
 import io.github.glaforge.gemini.interactions.GeminiInteractionsClient;
 import io.github.glaforge.gemini.interactions.model.Events;
 import io.github.glaforge.gemini.interactions.model.InteractionParams.ModelInteractionParams;
+
 import java.util.Map;
 
 public class StructuredOutput {

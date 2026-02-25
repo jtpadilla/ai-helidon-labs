@@ -5,8 +5,8 @@ import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.ComputeTokensConfig;
 import com.google.genai.types.ComputeTokensResponse;
 import com.google.genai.types.TokensInfo;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import io.github.jtpadilla.util.BytesUtils;
 
 import java.util.List;

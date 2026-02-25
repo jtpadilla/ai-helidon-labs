@@ -8,8 +8,8 @@ import com.google.genai.types.FunctionDeclaration;
 import com.google.genai.types.GenerateContentConfig;
 import com.google.genai.types.GenerateContentResponse;
 import com.google.genai.types.Tool;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 public class GenerateContentWithFunctionCallJson {
 

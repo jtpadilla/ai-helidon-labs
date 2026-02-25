@@ -16,22 +16,22 @@
 
 package io.github.glaforge.gemini.interactions.server;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import io.github.glaforge.gemini.interactions.model.Events;
+import io.github.glaforge.gemini.interactions.model.Interaction;
+import io.github.glaforge.gemini.interactions.model.InteractionParams;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.json.JsonMapper;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import io.github.glaforge.gemini.interactions.model.Interaction;
-import io.github.glaforge.gemini.interactions.model.InteractionParams;
-import io.github.glaforge.gemini.interactions.model.Events;
-import java.util.stream.Stream;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Base class for handling Gemini Interactions API requests in an {@link HttpHandler}.

@@ -4,11 +4,11 @@ import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
+import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.FunctionDirectory;
 import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import io.github.jtpadilla.gcloud.genai.function.FunctionGateway;
 import io.github.jtpadilla.gcloud.genai.function.FunctionGatewayException;
-import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
-import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.FunctionDirectory;
 
 public final class ComplexFunctionCaller {
 

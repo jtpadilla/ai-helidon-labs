@@ -6,8 +6,8 @@ import com.google.genai.types.BatchJob;
 import com.google.genai.types.BatchJobDestination;
 import com.google.genai.types.BatchJobSource;
 import com.google.genai.types.CreateBatchJobConfig;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 public class BatchManagement {
 

@@ -4,13 +4,13 @@ import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.Content;
 import com.google.genai.types.UpdateCachedContentConfig;
+import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
 import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import io.github.jtpadilla.gcloud.genai.cached.CachedContentException;
 import io.github.jtpadilla.gcloud.genai.cached.CachedContentWrapper;
 import io.github.jtpadilla.gcloud.genai.cached.CachesWrapper;
 import io.github.jtpadilla.gcloud.genai.util.FethPartException;
 import io.github.jtpadilla.gcloud.genai.util.FethPartUtil;
-import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
 
 import java.time.Duration;
 import java.util.List;

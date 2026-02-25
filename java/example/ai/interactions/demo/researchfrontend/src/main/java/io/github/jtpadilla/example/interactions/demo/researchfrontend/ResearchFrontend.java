@@ -1,19 +1,6 @@
 package io.github.jtpadilla.example.interactions.demo.researchfrontend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import io.github.glaforge.gemini.interactions.GeminiInteractionsClient;
-import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
-import tools.jackson.databind.json.JsonMapper;
-
 import io.github.glaforge.gemini.interactions.model.Config.DeepResearchAgentConfig;
 import io.github.glaforge.gemini.interactions.model.Config.ThinkingSummaries;
 import io.github.glaforge.gemini.interactions.model.Content.ImageContent;
@@ -28,6 +15,18 @@ import io.github.glaforge.gemini.interactions.model.Tool.GoogleSearch;
 import io.github.glaforge.gemini.schema.GSchema;
 import io.javelit.core.Jt;
 import io.javelit.core.Server;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ResearchFrontend {
 

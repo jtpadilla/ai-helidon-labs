@@ -2,7 +2,6 @@ package com.speedycontrol.labs.example.genai.study.complexfunctioncalling.functi
 
 import com.google.genai.types.FunctionCall;
 import com.google.genai.types.Tool;
-import io.github.jtpadilla.gcloud.genai.function.FunctionGatewayException;
 import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.impl.formatconverter.FormatConverterDef;
 import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.impl.formatconverter.FormatConverterImpl;
 import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.impl.informationsearcher.InformationSearcherDef;
@@ -11,6 +10,7 @@ import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.functio
 import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.impl.mathcalculator.MathCalculatorImpl;
 import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.impl.systeminfo.SystemInfoDef;
 import com.speedycontrol.labs.example.genai.study.complexfunctioncalling.function.impl.systeminfo.SystemInfoImpl;
+import io.github.jtpadilla.gcloud.genai.function.FunctionGatewayException;
 
 import java.util.HashMap;
 import java.util.Map;

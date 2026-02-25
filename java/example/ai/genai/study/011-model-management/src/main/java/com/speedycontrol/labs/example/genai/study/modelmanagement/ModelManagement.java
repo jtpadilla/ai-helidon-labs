@@ -5,8 +5,8 @@ import com.google.genai.Pager;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.ListModelsConfig;
 import com.google.genai.types.Model;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 // Es posible que el comando client.models.list(..) no funciona en modo Vertex
 public class ModelManagement {

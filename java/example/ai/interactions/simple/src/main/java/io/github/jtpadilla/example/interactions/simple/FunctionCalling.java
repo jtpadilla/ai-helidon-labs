@@ -1,12 +1,13 @@
 package io.github.jtpadilla.example.interactions.simple;
 
-import io.github.jtpadilla.example.interactions.util.Util;
 import io.github.glaforge.gemini.interactions.GeminiInteractionsClient;
 import io.github.glaforge.gemini.interactions.model.Content;
-import io.github.glaforge.gemini.interactions.model.Content.*;
+import io.github.glaforge.gemini.interactions.model.Content.FunctionCallContent;
+import io.github.glaforge.gemini.interactions.model.Content.FunctionResultContent;
 import io.github.glaforge.gemini.interactions.model.Interaction;
 import io.github.glaforge.gemini.interactions.model.InteractionParams.ModelInteractionParams;
 import io.github.glaforge.gemini.interactions.model.Tool.Function;
+import io.github.jtpadilla.example.interactions.util.Util;
 
 import java.util.List;
 import java.util.Map;

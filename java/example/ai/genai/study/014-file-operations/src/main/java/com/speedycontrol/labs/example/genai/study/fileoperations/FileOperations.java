@@ -4,8 +4,8 @@ import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.File;
 import com.google.genai.types.UploadFileConfig;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;

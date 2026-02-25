@@ -3,8 +3,8 @@ package com.speedycontrol.labs.example.genai.study.embedcontent;
 import com.google.genai.Client;
 import com.google.genai.errors.GenAiIOException;
 import com.google.genai.types.EmbedContentResponse;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 public class EmbedContent {
 

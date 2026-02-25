@@ -6,8 +6,8 @@ import com.google.genai.types.Content;
 import com.google.genai.types.CountTokensConfig;
 import com.google.genai.types.CountTokensResponse;
 import com.google.genai.types.Part;
-import io.github.jtpadilla.gcloud.genai.IGenAIService;
 import com.speedycontrol.labs.example.genai.common.GenAIServiceSelector;
+import io.github.jtpadilla.gcloud.genai.IGenAIService;
 
 public final class CountTokensWithConfigs {
 
