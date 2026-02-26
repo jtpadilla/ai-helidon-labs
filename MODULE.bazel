@@ -85,6 +85,7 @@ maven.install(
 
         ## UI Web con java para prototipar
         "io.javelit:javelit:0.86.0",
+        "tech.tablesaw:tablesaw-core:0.44.4",
 
     ],
     boms = [
