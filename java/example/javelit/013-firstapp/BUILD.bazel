@@ -1,12 +1,14 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
-    name = "012-pages",
+    name = "013-firstapp",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "io.github.jtpadilla.example.javelit.pages.Pages",
+    main_class = "io.github.jtpadilla.example.javelit.firstapp.FirstApp",
     visibility = ["//visibility:public"],
     deps = [
+        "@maven//:com_google_api_gax",
         "@maven//:io_javelit_javelit",
         "@maven//:org_icepear_echarts_echarts_java",
+        "@maven//:tech_tablesaw_tablesaw_core",
     ],
 )
