@@ -2,10 +2,8 @@ load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
     name = "research-frontend",
-    srcs = [
-        "src/main/java/io/github/jtpadilla/example/interactions/demo/researchfrontend/ResearchFrontend.java",
-    ],
-    main_class = "io.github.jtpadilla.example.interactions.demo.researchfrontend.ResearchFrontend",
+    srcs = glob(["src/main/java/**/*.java"]),
+    main_class = "io.github.jtpadilla.example.interactions.demo.researchfrontend.Launcher",
     visibility = ["//visibility:public"],
     deps = [
         "//java/example/ai/interactions/util",
@@ -15,4 +13,3 @@ java_binary(
         "@maven//:tools_jackson_core_jackson_databind",
     ],
 )
-
