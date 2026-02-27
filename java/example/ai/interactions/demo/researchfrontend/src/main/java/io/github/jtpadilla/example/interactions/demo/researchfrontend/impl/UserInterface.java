@@ -15,10 +15,10 @@ public class UserInterface implements JtRunnable {
 
     public UserInterface(GeminiInteractionsClient client) {
         this.client = client;
-        build();
     }
 
-    public void build() {
+    @Override
+    public void run() {
 
         //
         // Formulario 'subject'
@@ -196,11 +196,6 @@ public class UserInterface implements JtRunnable {
         var imageBytes = Util.getInfographicData(infographicInteraction);
 
         Jt.image(imageBytes).use(infographicPlaceholder);
-
-    }
-
-    @Override
-    public void run() {
 
     }
 
