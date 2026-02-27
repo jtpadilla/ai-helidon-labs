@@ -1,10 +1,13 @@
 package io.github.jtpadilla.example.interactions.demo.researchfrontend.impl;
 
 import io.github.glaforge.gemini.interactions.GeminiInteractionsClient;
-import io.github.glaforge.gemini.interactions.model.Interaction;
-import io.github.glaforge.gemini.interactions.model.InteractionParams;
-import io.github.glaforge.gemini.interactions.model.Tool;
+import io.github.glaforge.gemini.interactions.model.*;
 import io.github.glaforge.gemini.schema.GSchema;
+
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Interactions {
 
@@ -36,5 +39,54 @@ public class Interactions {
 
     }
 
+    public String createTopics(
+            String subject,
+            List<String> selectedTopics,
+            BiConsumer<Long, String> contentConsumer,
+            Consumer<String> deltaConsumer) {
+
+        var topicsList = selectedTopics.stream().map(t -> "- " + t).collect(Collectors.joining("\n"));
+
+        final InteractionParams.AgentInteractionParams researchParams = InteractionParams.AgentInteractionParams.builder()
+                .agent(REPORT_AGENT)
+                .input(String.format("""
+                            Write a concise research report on the following subject:
+                            <subject>
+                            %s
+                            </subject>
+
+                            By focusing on the following topics:
+                            <topics>
+                            %s
+                            </topics>
+                            """, subject, topicsList))
+                .background(true)
+                .stream(true)
+                .agentConfig(new Config.DeepResearchAgentConfig(Config.ThinkingSummaries.AUTO))
+                .store(true)
+                .build();
+
+        StringBuilder reportBuilder = new StringBuilder();
+
+        long startTime = System.currentTimeMillis();
+
+        client.stream(researchParams).forEach(event -> {
+            if (event instanceof Events.ContentDelta delta) {
+                if (delta.delta() instanceof Events.ThoughtSummaryDelta thought) {
+                    if (thought.content() instanceof Content.TextContent textContent) {
+                        contentConsumer.accept(System.currentTimeMillis() - startTime, textContent.text());
+                    }
+                } else if (delta.delta() instanceof Events.TextDelta textPart) {
+                    reportBuilder.append(textPart.text());
+                    deltaConsumer.accept(reportBuilder.toString());
+                }
+            } else {
+                System.out.printf("%nEVENT: %s\n", event);
+            }
+        });
+
+        return reportBuilder.toString();
+
+    }
 
 }

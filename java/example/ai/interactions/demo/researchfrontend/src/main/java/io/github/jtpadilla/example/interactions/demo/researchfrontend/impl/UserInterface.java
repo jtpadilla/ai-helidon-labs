@@ -8,6 +8,8 @@ import io.javelit.core.JtRunnable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class UserInterface implements JtRunnable {
@@ -130,49 +132,20 @@ public class UserInterface implements JtRunnable {
         Jt.info("Preparing infographic...").icon(":hourglass:").use(infographicPlaceholder);
 
         // compute/fetch report section
-        var topicsList = selectedTopics.stream().map(t -> "- " + t).collect(Collectors.joining("\n"));
-        InteractionParams.AgentInteractionParams researchParams = InteractionParams.AgentInteractionParams.builder()
-                .agent("deep-research-pro-preview-12-2025")
-                .input(String.format("""
-                            Write a concise research report on the following subject:
-                            <subject>
-                            %s
-                            </subject>
 
-                            By focusing on the following topics:
-                            <topics>
-                            %s
-                            </topics>
-                            """, subject, topicsList))
-                .background(true)
-                .stream(true)
-                .agentConfig(new Config.DeepResearchAgentConfig(Config.ThinkingSummaries.AUTO))
-                .store(true)
-                .build();
+        final BiConsumer<Long, String> contentConsumer = (elapsed, text) -> {
+            String timeString = String.format("%dm%ds", elapsed / 60000, (elapsed % 60000) / 1000);
+            Jt.markdown("⏱️ `" + timeString + "` " + text).use(reportPlaceholder);
+        };
 
-        StringBuilder reportBuilder = new StringBuilder();
+        final Consumer<String> deltaConsumer = (text) -> {
+            Jt.markdown(Util.transformCitations(text)).use(reportPlaceholder);
+        };
 
-        long startTime = System.currentTimeMillis();
-
-        client.stream(researchParams).forEach(event -> {
-            if (event instanceof Events.ContentDelta delta) {
-                if (delta.delta() instanceof Events.ThoughtSummaryDelta thought) {
-                    if (thought.content() instanceof Content.TextContent textContent) {
-                        long elapsed = System.currentTimeMillis() - startTime;
-                        String timeString = String.format("%dm%ds", elapsed / 60000, (elapsed % 60000) / 1000);
-                        Jt.markdown("⏱️ `" + timeString + "` " + textContent.text()).use(reportPlaceholder);
-                    }
-                } else if (delta.delta() instanceof Events.TextDelta textPart) {
-                    reportBuilder.append(textPart.text());
-                    Jt.markdown(Util.transformCitations(reportBuilder.toString())).use(reportPlaceholder);
-                }
-            } else {
-                System.out.printf("%nEVENT: %s\n", event);
-            }
-        });
+        final String report = interactions.createTopics(subject, selectedTopics, contentConsumer, deltaConsumer);
 
         var rawReportExpander = Jt.expander("Raw Markdown Report").use(reportContainer);
-        Jt.text(Util.transformCitations(reportBuilder.toString())).use(rawReportExpander);
+        Jt.text(Util.transformCitations(report)).use(rawReportExpander);
 
         // compute/fetch summary
         InteractionParams.ModelInteractionParams summaryParams = InteractionParams.ModelInteractionParams.builder()
@@ -183,7 +156,7 @@ public class UserInterface implements JtRunnable {
                             (don't write "Here's a summary..." or equivalent).
 
                             %s
-                            """, reportBuilder))
+                            """, report))
                 .store(true)
                 .build();
 
