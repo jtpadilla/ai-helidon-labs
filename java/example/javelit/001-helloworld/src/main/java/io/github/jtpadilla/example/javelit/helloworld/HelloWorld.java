@@ -1,7 +1,7 @@
 package io.github.jtpadilla.example.javelit.helloworld;
 
-import io.javelit.core.Server;
 import io.javelit.core.Jt;
+import io.javelit.core.Server;
 
 class HelloWorld {
 

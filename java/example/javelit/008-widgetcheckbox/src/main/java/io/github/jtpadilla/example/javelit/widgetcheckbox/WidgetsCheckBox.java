@@ -2,11 +2,7 @@ package io.github.jtpadilla.example.javelit.widgetscheckbox;
 
 import io.javelit.core.Jt;
 import io.javelit.core.Server;
-import org.icepear.echarts.Gauge;
 import org.icepear.echarts.Line;
-import org.icepear.echarts.charts.gauge.GaugeDataItem;
-import org.icepear.echarts.charts.gauge.GaugeProgress;
-import org.icepear.echarts.charts.gauge.GaugeSeries;
 
 class WidgetsCheckBox {
 

@@ -1,18 +1,5 @@
 package io.github.jtpadilla.example.javelit.firstapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.stream.IntStream;
-import java.util.zip.GZIPInputStream;
-
 import io.javelit.core.Jt;
 import io.javelit.core.Server;
 import org.icepear.echarts.Bar;
@@ -25,6 +12,19 @@ import tech.tablesaw.api.IntColumn;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.selection.Selection;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.zip.GZIPInputStream;
 
 class FirstApp {
 
