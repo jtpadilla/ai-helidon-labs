@@ -1,5 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 
+load("@protobuf//bazel:proto_library.bzl", "proto_library")
+load("@protobuf//bazel:java_proto_library.bzl", "java_proto_library")
+load("@rules_java//java:defs.bzl", "java_library")
+
 proto_library(
     name = "a2a_proto",
     srcs = ["a2a.proto"],
@@ -10,5 +14,13 @@ proto_library(
         "@protobuf//:empty_proto",
         "@protobuf//:struct_proto",
         "@protobuf//:timestamp_proto",
+    ],
+)
+
+java_proto_library(
+    name = "a2a_java_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":a2a_proto",
     ],
 )
