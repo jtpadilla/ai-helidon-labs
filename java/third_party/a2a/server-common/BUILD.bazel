@@ -1,0 +1,17 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_library(
+    name = "server-common",
+    srcs = glob(["src/main/java/**/*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//java/third_party/a2a/spec",
+        "//java/third_party/a2a/jsonrpc-common",
+        "//java/third_party/a2a/client",
+        "@maven//:org_jspecify_jspecify",
+        "@maven//:jakarta_inject_jakarta_inject_api",
+        "@maven//:jakarta_annotation_jakarta_annotation_api",
+        "@maven//:jakarta_enterprise_jakarta_enterprise_cdi_api",
+        "@maven//:org_slf4j_slf4j_api",
+    ],
+)
