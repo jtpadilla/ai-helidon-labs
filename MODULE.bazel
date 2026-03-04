@@ -80,6 +80,10 @@ maven.install(
         "io.javelit:javelit:0.86.0",
         "tech.tablesaw:tablesaw-core:0.44.4",
 
+        ## Dagger 2
+        "com.google.dagger:dagger:2.55",
+        "com.google.dagger:dagger-compiler:2.55",
+
     ],
     boms = [
         "com.google.cloud:libraries-bom:26.74.0",
