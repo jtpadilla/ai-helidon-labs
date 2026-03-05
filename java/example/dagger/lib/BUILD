@@ -11,7 +11,7 @@ java_plugin(
 )
 
 java_library(
-    name = "dagger",
+    name = "lib",
     exported_plugins = [":dagger_compiler_plugin"],
     exports = [
         "@maven//:com_google_dagger_dagger",
