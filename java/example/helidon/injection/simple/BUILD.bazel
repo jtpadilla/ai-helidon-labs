@@ -1,23 +1,10 @@
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
-load("@rules_graalvm//graalvm:defs.bzl", "native_image")
-
-java_library(
-    name = "simple_lib",
-    srcs = glob(["src/main/java/**/*.java"]),
-    deps = [
-        "//java/lib:helidon",
-    ],
-)
 
 java_binary(
     name = "simple",
+    srcs = glob(["src/main/java/**/*.java"]),
     main_class = "io.github.jtpadilla.example.helidon.injection.simple.Main",
-    runtime_deps = [":simple_lib"],
-)
-
-native_image(
-    name = "simple_native",
-    executable_name = "simple-native",
-    main_class = "io.github.jtpadilla.example.helidon.injection.simple.Main",
-    deps = [":simple_lib"],
+    deps = [
+        "//java/lib:helidon",
+    ],
 )

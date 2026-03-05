@@ -10,8 +10,6 @@ bazel_dep(name = "grpc-java", version = "1.78.0")
 bazel_dep(name = "rules_pkg", version = "1.2.0")
 bazel_dep(name = "rules_oci", version = "2.2.7")
 bazel_dep(name = "protobuf", version = "33.4")
-bazel_dep(name = "rules_graalvm", version = "0.11.1")
-
 
 # Dependencias MAVEL
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
@@ -105,30 +103,16 @@ maven.install(
 use_repo(maven, "maven")
 
 # =========================================
-# Graalvm
-# =========================================
-gvm = use_extension("@rules_graalvm//:extensions.bzl", "graalvm")
-gvm.graalvm(
-    name = "graalvm",
-    version = "21.0.0",  # pass graalvm or specific jdk version supported by gvm
-    distribution = "ce",  # `oracle`, `ce`, or `community`
-    java_version = "21",  # `17`, `20`, `22`, `23`, etc.
-)
-use_repo(gvm, "graalvm")
-register_toolchains("@graalvm//:jvm")
-register_toolchains("@graalvm//:sdk")
-
-# =========================================
 # OCI dependencies
 # =========================================
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
-    name = "java_25_base",
+    name = "java_21_base",
     image = "index.docker.io/library/eclipse-temurin",
     platforms = [
         "linux/amd64",
         #         "linux/arm64/v8",
     ],
-    tag = "25-jdk",
+    tag = "21-jdk",
 )
-use_repo(oci, "java_25_base", "java_25_base_linux_amd64")
+use_repo(oci, "java_21_base", "java_21_base_linux_amd64")

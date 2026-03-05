@@ -1,5 +1,4 @@
 load("@rules_java//java:defs.bzl", "java_binary")
-load("@rules_graalvm//graalvm:defs.bzl", "native_image")
 
 java_binary(
     name = "greeter",

@@ -9,9 +9,9 @@ java_binary(
     visibility = ["//visibility:public"],
     deps = [
         "//java/platform/server/agent",
+        "//java/third_party/closeable",
         "@maven//:com_google_guava_guava",
         "@maven//:com_google_inject_guice",
-        "//java/third_party/closeable",
     ],
 )
 
@@ -24,7 +24,7 @@ pkg_tar(
 # Construye el container docker incluyendo el jar de la imagen anterior
 oci_image(
     name = "iatevaleagent_gcloud_image",
-    base = "@java_25_base",
+    base = "@java_21_base",
     entrypoint = [
         "java",
         "-jar",
