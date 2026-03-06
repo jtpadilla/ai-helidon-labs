@@ -1,4 +1,4 @@
-package io.github.jtpadilla.example.helidon.injection.factory.supplier;
+package io.github.jtpadilla.example.helidon.injection.factory.servicefactory;
 
 import io.helidon.service.registry.Service;
 import io.helidon.service.registry.Services;
