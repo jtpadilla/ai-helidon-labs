@@ -14,4 +14,12 @@ class SystemProperties {
         this.httpPort = httpPort;
     }
 
+    @Override
+    public String toString() {
+        return "SystemProperties{" +
+                "httpHost='" + httpHost + '\'' +
+                ", httpPort='" + httpPort + '\'' +
+                '}';
+    }
+
 }
