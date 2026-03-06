@@ -2,11 +2,10 @@ load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 
 java_binary(
     name = "supplier-optional",
-    srcs = glob(["src/main/java/io/github/**/*.java"]),
-    main_class = "io.github.jtpadilla.example.helidon.injection.factory.supplier.Main",
+    srcs = glob(["src/main/java/**/*.java"]),
+    main_class = "io.github.jtpadilla.example.helidon.injection.factory.supplieroptional.Main",
     deps = [
         "@maven//:org_jspecify_jspecify",
         "//java/lib:helidon",
     ],
 )
-
