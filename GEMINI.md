@@ -32,7 +32,7 @@ El proyecto está organizado en capas para facilitar la reutilización y el aisl
 *   **IA de Google:** Vertex AI SDK, Google GenAI SDK (Gemini) y Agent Development Kit (ADK).
 *   **Servicios:** Helidon 4 SE (Webserver, Service Registry, Logging).
 *   **Persistencia:** JetBrains Xodus (KV Store, Entity Store, VFS) y Google Cloud Datastore.
-*   **Inyección de Dependencias:** Helidon Service Registry, Google Dagger 2 y Jakarta Inject.
+*   **Inyección de Dependencias:** Helidon Service Registry.
 *   **UI & Datos:** Javelit (prototipado UI Java) y Tablesaw (análisis de datos).
 *   **Mensajería:** Telegram Bots SDK (Long Polling).
 *   **Construcción:** Bazel (vía `MODULE.bazel` para dependencias externas).
