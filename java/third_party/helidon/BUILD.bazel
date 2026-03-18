@@ -54,5 +54,7 @@ java_library(
     ],
     visibility = ["//visibility:public"],
     exports = [
+        ":common",
+        "@maven//:io_helidon_builder_helidon_builder_api",
     ],
 )

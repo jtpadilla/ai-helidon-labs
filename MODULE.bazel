@@ -115,6 +115,7 @@ maven.install(
         "io.helidon.service:helidon-service-registry",
         "io.helidon.service:helidon-service-codegen",
         # builder
+        "io.helidon.builder:helidon-builder-api",
         "io.helidon.builder:helidon-builder-codegen",
 
     ],
