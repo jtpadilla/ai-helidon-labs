@@ -124,7 +124,7 @@ maven.install(
         "com.fasterxml.jackson:jackson-bom:2.21.0",
         "tools.jackson:jackson-bom:3.1.0",
         "jakarta.platform:jakarta.jakartaee-bom:10.0.0",
-        "io.helidon:helidon-bom:4.4.0",
+        "io.helidon:helidon-bom:4.3.4",
     ],
     version_conflict_policy = "default",
 )
