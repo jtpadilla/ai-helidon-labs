@@ -26,6 +26,8 @@ interface ServiceConfigBlueprint {
     Optional<String> description();
 
     // Lista → genera addXxx() y clearXxx() en el builder
+    @Option.Singular("tag")
+    @Option.DefaultCode("new java.util.ArrayList<>(java.util.List.of(\"Hola\", \"Adios\"))")
     List<String> tags();
 
     // Mapa
