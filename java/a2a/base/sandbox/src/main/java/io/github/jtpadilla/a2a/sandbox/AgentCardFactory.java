@@ -19,7 +19,7 @@ public final class AgentCardFactory {
                         .setProtocolBinding("GRPC")
                         .setProtocolVersion("0.3")
                         .build())
-                .setCapabilities(AgentCapabilities.newBuilder().build())
+                .setCapabilities(AgentCapabilities.newBuilder().setStreaming(true).build())
                 .addDefaultInputModes("text/plain")
                 .addDefaultOutputModes("text/plain")
                 .addSkills(AgentSkill.newBuilder()
