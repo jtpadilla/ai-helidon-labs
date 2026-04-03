@@ -1,5 +1,6 @@
 package io.github.jtpadilla.a2a.sandbox;
 
+import com.google.lf.a2a.v1.A2A;
 import com.google.lf.a2a.v1.AgentCard;
 import io.helidon.webserver.WebServer;
 import io.helidon.webserver.grpc.GrpcReflectionFeature;
@@ -16,7 +17,7 @@ public class Main {
                 .register("/.well-known", new WellKnownHandler(agentCard));
 
         final GrpcRouting.Builder grpcRouting = GrpcRouting.builder()
-                .service(AgentCard.getDescriptor().getFile(), new A2AServiceImpl(agentCard));
+                .service(A2A.getDescriptor().getFile(), new A2AServiceImpl(agentCard));
 
         final WebServer server = WebServer.builder()
                 .port(8080)
