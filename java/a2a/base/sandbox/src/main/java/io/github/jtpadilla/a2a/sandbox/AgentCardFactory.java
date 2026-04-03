@@ -1,0 +1,33 @@
+package io.github.jtpadilla.a2a.sandbox;
+
+import com.google.lf.a2a.v1.AgentCard;
+import com.google.lf.a2a.v1.AgentCapabilities;
+import com.google.lf.a2a.v1.AgentInterface;
+import com.google.lf.a2a.v1.AgentSkill;
+
+public final class AgentCardFactory {
+
+    private AgentCardFactory() {}
+
+    public static AgentCard create() {
+        return AgentCard.newBuilder()
+                .setName("Sandbox Agent")
+                .setDescription("A2A sandbox agent")
+                .setVersion("0.0.1")
+                .addSupportedInterfaces(AgentInterface.newBuilder()
+                        .setUrl("http://localhost:8080")
+                        .setProtocolBinding("GRPC")
+                        .setProtocolVersion("0.3")
+                        .build())
+                .setCapabilities(AgentCapabilities.newBuilder().build())
+                .addDefaultInputModes("text/plain")
+                .addDefaultOutputModes("text/plain")
+                .addSkills(AgentSkill.newBuilder()
+                        .setId("echo")
+                        .setName("Echo")
+                        .setDescription("Echoes input")
+                        .addTags("echo")
+                        .build())
+                .build();
+    }
+}
