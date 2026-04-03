@@ -15,7 +15,7 @@ public final class AgentCardFactory {
                 .setDescription("A2A sandbox agent")
                 .setVersion("0.0.1")
                 .addSupportedInterfaces(AgentInterface.newBuilder()
-                        .setUrl("http://localhost:8080")
+                        .setUrl("localhost:8080")
                         .setProtocolBinding("GRPC")
                         .setProtocolVersion("0.3")
                         .build())
