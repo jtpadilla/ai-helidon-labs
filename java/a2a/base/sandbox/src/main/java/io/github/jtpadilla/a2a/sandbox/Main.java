@@ -24,8 +24,5 @@ public class Main {
                 .build()
                 .start();
 
-        System.out.println("A2A sandbox running — port " + server.port());
-        System.out.println("Agent card : http://localhost:" + server.port() + "/.well-known/agent.json");
-        System.out.println("gRPC       : lf.a2a.v1.A2AService on port " + server.port());
     }
 }

@@ -10,6 +10,14 @@ public final class AgentCardFactory {
     private AgentCardFactory() {}
 
     public static AgentCard create() {
+
+        final AgentSkill helloSkill = AgentSkill.newBuilder()
+                .setId("echo")
+                .setName("Echo")
+                .setDescription("Echoes input")
+                .addTags("echo")
+                .build();
+
         return AgentCard.newBuilder()
                 .setName("IAtevale Agent")
                 .setDescription("Pemite evaluar la tecnologia A2A")
@@ -19,15 +27,14 @@ public final class AgentCardFactory {
                         .setProtocolBinding("GRPC")
                         .setProtocolVersion("1.0")
                         .build())
-                .setCapabilities(AgentCapabilities.newBuilder().setStreaming(true).build())
+                .setCapabilities(AgentCapabilities.newBuilder()
+                        .setStreaming(false)
+                        .build())
                 .addDefaultInputModes("text/plain")
                 .addDefaultOutputModes("text/plain")
-                .addSkills(AgentSkill.newBuilder()
-                        .setId("echo")
-                        .setName("Echo")
-                        .setDescription("Echoes input")
-                        .addTags("echo")
-                        .build())
+                .addSkills(helloSkill)
                 .build();
+
     }
+
 }
