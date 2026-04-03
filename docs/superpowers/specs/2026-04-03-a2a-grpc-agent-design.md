@@ -36,6 +36,7 @@ Añadir a los `deps` del `java_binary`:
 ```python
 "//proto/lf/a2a/v1:a2a_java_grpc",
 "@maven//:io_helidon_webserver_helidon_webserver_grpc",
+"@maven//:io_helidon_webserver_helidon_webserver_grpc_reflection",
 "@maven//:io_grpc_grpc_api",
 "@maven//:io_grpc_grpc_stub",
 ```
@@ -70,6 +71,7 @@ WebServer server = WebServer.builder()
         .addRouting(HttpRouting.builder()
                 .register("/.well-known", new WellKnownHandler(agentCard)))
         .addRouting(GrpcRouting.builder()
+                .service(GrpcReflectionService.create())
                 .service(new A2AServiceImpl(agentCard)))
         .build()
         .start();

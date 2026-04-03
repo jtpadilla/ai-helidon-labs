@@ -46,6 +46,7 @@ java_binary(
         "@maven//:io_helidon_http_helidon_http",
         "@maven//:io_helidon_webserver_helidon_webserver",
         "@maven//:io_helidon_webserver_helidon_webserver_grpc",
+        "@maven//:io_helidon_webserver_helidon_webserver_grpc_reflection",
         "@protobuf//:protobuf_java_util",
     ],
 )
@@ -152,6 +153,7 @@ package io.github.jtpadilla.a2a.sandbox;
 
 import com.google.lf.a2a.v1.AgentCard;
 import io.helidon.webserver.WebServer;
+import io.helidon.webserver.grpc.GrpcReflectionService;
 import io.helidon.webserver.grpc.GrpcRouting;
 import io.helidon.webserver.http.HttpRouting;
 
@@ -165,6 +167,7 @@ public class Main {
                 .addRouting(HttpRouting.builder()
                         .register("/.well-known", new WellKnownHandler(agentCard)))
                 .addRouting(GrpcRouting.builder()
+                        .service(GrpcReflectionService.create())
                         .service(new A2AServiceImpl(agentCard)))
                 .build()
                 .start();
