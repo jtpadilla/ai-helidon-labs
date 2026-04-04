@@ -1,1 +1,0 @@
-Implementacion de servicios sobre infraestructura simple.
