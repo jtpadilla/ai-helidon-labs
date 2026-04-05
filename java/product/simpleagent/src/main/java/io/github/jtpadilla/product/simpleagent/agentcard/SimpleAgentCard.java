@@ -1,4 +1,4 @@
-package io.github.jtpadilla.a2a.core.server.agentcard;
+package io.github.jtpadilla.product.simpleagent.agentcard;
 
 import com.google.lf.a2a.v1.AgentCapabilities;
 import com.google.lf.a2a.v1.AgentCard;
