@@ -1,0 +1,4 @@
+package io.github.jtpadilla.a2a.core.server.service.persistence;
+
+public class A2AServerContextService {
+}
