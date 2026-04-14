@@ -1,9 +1,9 @@
 package io.github.jtpadilla.example.langchain4j.streaming1;
 
-import dev.langchain4j.data.message.Content;
-import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.rag.content.Content;
+import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.chat.response.ChatResponse;
-import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
+import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.TokenStream;
 import io.helidon.config.Config;
@@ -20,7 +20,7 @@ public class StreamingDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        StreamingChatModel model = GoogleAiGeminiStreamingChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true)
@@ -32,14 +32,14 @@ public class StreamingDemo {
 
         Assistant assistant = AiServices.create(Assistant.class, model);
 
-        TokenStream tokenStream = assistant.chat("Tell me a joke");
+        TokenStream tokenStream = assistant.chat("Tell me a long joke in Spanish");
 
         CompletableFuture<ChatResponse> futureResponse = new CompletableFuture<>();
 
         tokenStream
                 .onPartialResponse(System.out::println)
                 .onPartialThinking(System.out::println)
-                .onRetrieved((List<Content> contents) -> System.out.println(contents))
+                .onRetrieved(System.out::println)
                 .onIntermediateResponse(System.out::println)
                 // This will be invoked every time a new partial tool call (usually containing a single token of the tool's arguments) is available.
                 .onPartialToolCall(System.out::println)
@@ -51,8 +51,13 @@ public class StreamingDemo {
                 .onError(futureResponse::completeExceptionally)
                 .start();
 
-        futureResponse.join();
+        // .join() bloquea la ejecución y devuelve el resultado cuando está listo.
+        ChatResponse response = futureResponse.join();
 
+        // Ahora podemos usar el resultado final para obtener metadatos.
+        System.out.println("\n\n--- Streaming Complete ---");
+        System.out.println("Finish Reason: " + response.finishReason());
+        System.out.println("Token Usage: " + response.tokenUsage());
     }
 
 }
