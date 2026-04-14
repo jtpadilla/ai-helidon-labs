@@ -123,6 +123,7 @@ maven.install(
 
         ## langchain4j
         "dev.langchain4j:langchain4j",
+        "dev.langchain4j:langchain4j-agentic",
         "dev.langchain4j:langchain4j-core",
         "dev.langchain4j:langchain4j-google-ai-gemini",
 
