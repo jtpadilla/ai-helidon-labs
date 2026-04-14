@@ -8,8 +8,8 @@ public class GeminiChatDemo {
 
     final static private String MODEL = "gemini-3.1-flash-lite-preview";
 
-    final static private String API_KEY = Config.global().get("aistudio-api-key").asString().orElseThrow(
-            () -> new IllegalStateException("Configuration key 'aistudio-api-key' is required"));
+    final static private String API_KEY = Config.global().get("gemini-api-key").asString().orElseThrow(
+            () -> new IllegalStateException("Configuration key 'gemini-api-key' is required"));
 
     public static void main(String[] args) {
 
