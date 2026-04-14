@@ -1,6 +1,5 @@
 package io.github.jtpadilla.example.langchain4j.streaming1;
 
-import dev.langchain4j.rag.content.Content;
 import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel;
@@ -8,7 +7,6 @@ import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.TokenStream;
 import io.helidon.config.Config;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class StreamingDemo {
