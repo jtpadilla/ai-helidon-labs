@@ -1,17 +1,21 @@
 package io.github.jtpadilla.example.langchain4j.chatmemory;
 
+import io.helidon.config.Config;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 
 public class GeminiChatDemo {
 
+    final static private String MODEL = "gemini-3.1-flash-lite-preview";
+
+    final static private String API_KEY = Config.global().get("aistudio-api-key").asString().orElseThrow(
+            () -> new IllegalStateException("Configuration key 'aistudio-api-key' is required"));
+
     public static void main(String[] args) {
-        // En un entorno real, usa System.getenv("GOOGLE_AI_KEY")
-        String apiKey = "TU_API_KEY_AQUI";
 
         ChatModel model = GoogleAiGeminiChatModel.builder()
-                .apiKey(apiKey)
-                .modelName("gemini-1.5-flash")
+                .apiKey(API_KEY)
+                .modelName(MODEL)
                 .logRequestsAndResponses(true) // Útil para debug en Bazel
                 .build();
 
@@ -23,5 +27,7 @@ public class GeminiChatDemo {
         // Para que funcione igual que tu demo, especificamos el sujeto:
         String followUp = model.chat("How old is Quentin Tarantino?");
         System.out.println("Gemini: " + followUp);
+
     }
+
 }

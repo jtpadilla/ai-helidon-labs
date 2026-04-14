@@ -109,6 +109,9 @@ maven.install(
         # common
         "io.helidon.common:helidon-common",
         "io.helidon.common:helidon-common-types",
+        # config
+        "io.helidon.config:helidon-config",
+        "io.helidon.config:helidon-config-yaml",
         # codegen
         "io.helidon.codegen:helidon-codegen-apt",
         # service
