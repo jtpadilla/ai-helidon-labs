@@ -15,7 +15,7 @@ public class StructuredDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true) // Útil para debug en Bazel
@@ -26,7 +26,7 @@ public class StructuredDemo {
             boolean isPositive(String text);
         }
 
-        SentimentAnalyzer sentimentAnalyzer = AiServices.create(SentimentAnalyzer.class, model);
+        SentimentAnalyzer sentimentAnalyzer = AiServices.create(SentimentAnalyzer.class, chatModel);
         boolean positive = sentimentAnalyzer.isPositive("It's wonderful!");
         System.out.println(positive); // Hello, how can I help you?
 

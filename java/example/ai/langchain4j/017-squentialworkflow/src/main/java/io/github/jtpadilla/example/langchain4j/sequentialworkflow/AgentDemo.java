@@ -55,7 +55,7 @@ public class AgentDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true)
@@ -63,19 +63,19 @@ public class AgentDemo {
 
         CreativeWriter creativeWriter = AgenticServices
                 .agentBuilder(CreativeWriter.class)
-                .chatModel(model)
+                .chatModel(chatModel)
                 .outputKey("story")
                 .build();
 
         AudienceEditor audienceEditor = AgenticServices
                 .agentBuilder(AudienceEditor.class)
-                .chatModel(model)
+                .chatModel(chatModel)
                 .outputKey("story")
                 .build();
 
         StyleEditor styleEditor = AgenticServices
                 .agentBuilder(StyleEditor.class)
-                .chatModel(model)
+                .chatModel(chatModel)
                 .outputKey("story")
                 .build();
 

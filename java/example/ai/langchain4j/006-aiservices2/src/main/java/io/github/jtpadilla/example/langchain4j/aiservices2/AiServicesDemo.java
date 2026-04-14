@@ -15,7 +15,7 @@ public class AiServicesDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true) // Útil para debug en Bazel
@@ -26,7 +26,7 @@ public class AiServicesDemo {
             String chat(String userMessage);
         }
 
-        Friend friend = AiServices.create(Friend.class, model);
+        Friend friend = AiServices.create(Friend.class, chatModel);
 
         String answer = friend.chat("Hola");
         System.out.println(answer); // Hello, how can I help you?

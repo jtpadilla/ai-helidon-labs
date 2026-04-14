@@ -17,7 +17,7 @@ public class MemoryDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true)
@@ -29,7 +29,7 @@ public class MemoryDemo {
         }
 
         Assistant assistant = AiServices.builder(Assistant.class)
-                .chatModel(model)
+                .chatModel(chatModel)
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(10))
                 .build();
 

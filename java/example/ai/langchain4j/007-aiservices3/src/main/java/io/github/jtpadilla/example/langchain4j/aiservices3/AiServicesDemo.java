@@ -16,7 +16,7 @@ public class AiServicesDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true) // Útil para debug en Bazel
@@ -27,7 +27,7 @@ public class AiServicesDemo {
         }
 
         Friend friend = AiServices.builder(Friend.class)
-                .chatModel(model)
+                .chatModel(chatModel)
                 .systemMessageProvider(chatMemoryId -> "You are a good friend of mine.")
                 .systemMessageTransformer(systemMessage -> systemMessage + " Today's date is " + LocalDate.now() + ".")
                 .build();

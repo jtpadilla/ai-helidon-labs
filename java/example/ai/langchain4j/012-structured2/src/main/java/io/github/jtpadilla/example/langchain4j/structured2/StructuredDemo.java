@@ -15,7 +15,7 @@ public class StructuredDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true)
@@ -30,7 +30,7 @@ public class StructuredDemo {
             Priority analyzePriority(String issueDescription);
         }
 
-        PriorityAnalyzer priorityAnalyzer = AiServices.create(PriorityAnalyzer.class, model);
+        PriorityAnalyzer priorityAnalyzer = AiServices.create(PriorityAnalyzer.class, chatModel);
 
         Priority priority = priorityAnalyzer.analyzePriority("The main payment gateway is down, and customers cannot process transactions.");
         System.out.println(priority); // Hello, how can I help you?

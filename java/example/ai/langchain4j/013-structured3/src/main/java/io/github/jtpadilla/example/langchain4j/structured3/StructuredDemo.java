@@ -18,7 +18,7 @@ public class StructuredDemo {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true)
@@ -42,7 +42,7 @@ public class StructuredDemo {
             Person extractPersonFrom(String text);
         }
 
-        PersonExtractor personExtractor = AiServices.create(PersonExtractor.class, model);
+        PersonExtractor personExtractor = AiServices.create(PersonExtractor.class, chatModel);
 
         String text = """
             In 1968, amidst the fading echoes of Independence Day,

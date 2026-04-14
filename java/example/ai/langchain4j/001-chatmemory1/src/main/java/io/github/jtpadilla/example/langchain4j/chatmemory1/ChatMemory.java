@@ -13,19 +13,19 @@ public class ChatMemory {
 
     public static void main(String[] args) {
 
-        ChatModel model = GoogleAiGeminiChatModel.builder()
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true) // Útil para debug en Bazel
                 .build();
 
         // Primera interacción
-        String answer = model.chat("List 3 movies by Quentin Tarantino.");
+        String answer = chatModel.chat("List 3 movies by Quentin Tarantino.");
         System.out.println("Gemini: " + answer);
 
         // Segunda interacción (Sin memoria explícita, Gemini no sabrá quién es "he")
         // Para que funcione igual que tu demo, especificamos el sujeto:
-        String followUp = model.chat("How old is he?");
+        String followUp = chatModel.chat("How old is he?");
         System.out.println("Gemini: " + followUp);
 
     }

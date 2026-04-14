@@ -22,14 +22,14 @@ public class ChatMemory {
 
         final dev.langchain4j.memory.ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(20);
 
-        final ChatModel model = GoogleAiGeminiChatModel.builder()
+        final ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true) // Útil para debug en Bazel
                 .build();
 
         final ConversationalChain chain = ConversationalChain.builder()
-                .chatModel(model)
+                .chatModel(chatModel)
                 .chatMemory(chatMemory)
                 .build();
 
