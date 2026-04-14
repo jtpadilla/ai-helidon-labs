@@ -32,17 +32,17 @@ public class MemoryDemo {
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 .build();
 
-        String answerToKlaus = assistant.chat(1,"1) Hello, my name is Klaus");
-        System.out.println(answerToKlaus); // Hello, how can I help you?
+        String answerToKlaus = assistant.chat(1,"Hola, mi nombre es Klaus");
+        System.out.println("1) " + answerToKlaus); // Hello, how can I help you?
 
-        String answerToFrancine = assistant.chat(2, "2) Hola, mi nombre era Francine o era otro?");
-        System.out.println(answerToFrancine); // Hello, how can I help you?
+        String answerToFrancine = assistant.chat(2, "Hola, mi nombre es Francine");
+        System.out.println("2) " + answerToFrancine); // Hello, how can I help you?
 
-        answerToKlaus = assistant.chat(1,"1) Cual es mi nombre?");
-        System.out.println(answerToKlaus); // Hello, how can I help you?
+        answerToKlaus = assistant.chat(1,"Cual es mi nombre?");
+        System.out.println("1) " + answerToKlaus); // Hello, how can I help you?
 
-        answerToFrancine = assistant.chat(2, "2) Cual es mi nombre?");
-        System.out.println(answerToFrancine); // Hello, how can I help you?
+        answerToFrancine = assistant.chat(2, "Cual es mi nombre?");
+        System.out.println("2) " + answerToFrancine); // Hello, how can I help you?
 
     }
 
