@@ -24,10 +24,6 @@ public class StructuredDemo {
                 .logRequestsAndResponses(true)
                 .build();
 
-        enum Priority {
-            CRITICAL, HIGH, LOW
-        }
-
         @Description("an address") // you can add an optional description to help an LLM have a better understanding
         record Address(
             String street,
