@@ -11,6 +11,7 @@ import io.github.jtpadilla.example.format.Format;
 import io.helidon.config.Config;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -84,20 +85,23 @@ public class AgentDemo {
                     .toList();
         };
 
-        EveningPlannerAgent eveningPlannerAgent = AgenticServices
+        try (ExecutorService executorService = Executors.newFixedThreadPool(2)) {
+                EveningPlannerAgent eveningPlannerAgent = AgenticServices
                 .parallelBuilder(EveningPlannerAgent.class)
                 .subAgents(foodExpert, movieExpert)
-                .executor(Executors.newFixedThreadPool(2))
+                .executor(executorService)
                 .outputKey("plans")
                 .output(outputAdapterFunction)
                 .build();
 
-        List<EveningPlan> plans = eveningPlannerAgent.plan("romantic");
+            List<EveningPlan> plans = eveningPlannerAgent.plan("romantic");
 
-        String output = plans.stream()
-                .map(p -> "- **" + p.movie() + "** con *" + p.meal() + "*")
-                .collect(Collectors.joining("\n"));
-        System.out.println(Format.markdown(output));
+            String output = plans.stream()
+                    .map(p -> "- **" + p.movie() + "** con *" + p.meal() + "*")
+                    .collect(Collectors.joining("\n"));
+            System.out.println(Format.markdown(output));
+
+        }
 
     }
 
