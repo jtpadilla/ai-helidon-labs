@@ -112,7 +112,7 @@ public class AgentDemo {
                 .outputKey("response")
                 .build();
 
-        String response = expertRouterAgent.ask("Me he roto la pierna, ¿qué debo hacer?");
+        String response = expertRouterAgent.ask("Me he roto el coche, ¿qué debo hacer?");
 
         System.out.println(Format.markdown(response));
 

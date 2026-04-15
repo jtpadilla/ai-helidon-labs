@@ -2,6 +2,7 @@ package io.github.jtpadilla.example.langchain4j.chatmemory1;
 
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
+import io.github.jtpadilla.example.format.Format;
 import io.helidon.config.Config;
 
 public class ChatMemory {
@@ -21,12 +22,12 @@ public class ChatMemory {
 
         // Primera interacción
         String answer = chatModel.chat("List 3 movies by Quentin Tarantino.");
-        System.out.println("Gemini: " + answer);
+        System.out.println(Format.markdown(answer));
 
         // Segunda interacción (Sin memoria explícita, Gemini no sabrá quién es "he")
         // Para que funcione igual que tu demo, especificamos el sujeto:
         String followUp = chatModel.chat("How old is he?");
-        System.out.println("Gemini: " + followUp);
+        System.out.println(Format.markdown(followUp));
 
     }
 
