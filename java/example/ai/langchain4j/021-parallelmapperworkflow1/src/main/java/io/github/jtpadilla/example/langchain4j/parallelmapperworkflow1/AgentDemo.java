@@ -8,6 +8,7 @@ import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
+import io.github.jtpadilla.example.format.Format;
 import io.helidon.config.Config;
 
 import java.util.List;
@@ -68,6 +69,8 @@ public class AgentDemo {
                     new Person("Peach", "leo"));
 
             List<String> horoscopes = agent.generateHoroscopes(persons);
+            horoscopes.stream().map(Format::markdown).forEach(System.out::println);
+
         }
 
     }
