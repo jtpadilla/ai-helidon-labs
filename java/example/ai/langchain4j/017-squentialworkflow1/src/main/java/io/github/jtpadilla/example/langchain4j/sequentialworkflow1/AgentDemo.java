@@ -2,15 +2,12 @@ package io.github.jtpadilla.example.langchain4j.sequentialworkflow1;
 
 import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.AgenticServices;
-import dev.langchain4j.agentic.UntypedAgent;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 import io.github.jtpadilla.example.format.Format;
 import io.helidon.config.Config;
-
-import java.util.Map;
 
 public class AgentDemo {
 
