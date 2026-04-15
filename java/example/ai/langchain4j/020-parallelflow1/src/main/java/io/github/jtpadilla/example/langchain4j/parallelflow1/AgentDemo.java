@@ -9,10 +9,10 @@ import dev.langchain4j.service.V;
 import io.github.jtpadilla.example.format.Format;
 import io.helidon.config.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AgentDemo {
 
@@ -81,15 +81,10 @@ public class AgentDemo {
                 .output(agenticScope -> {
                     List<String> movies = agenticScope.readState("movies", List.of());
                     List<String> meals = agenticScope.readState("meals", List.of());
-
-                    List<EveningPlan> moviesAndMeals = new ArrayList<>();
-                    for (int i = 0; i < movies.size(); i++) {
-                        if (i >= meals.size()) {
-                            break;
-                        }
-                        moviesAndMeals.add(new EveningPlan(movies.get(i), meals.get(i)));
-                    }
-                    return moviesAndMeals;
+                    int size = Math.min(movies.size(), meals.size());
+                    return IntStream.range(0, size)
+                            .mapToObj(i -> new EveningPlan(movies.get(i), meals.get(i)))
+                            .toList();
                 })
                 .build();
 
