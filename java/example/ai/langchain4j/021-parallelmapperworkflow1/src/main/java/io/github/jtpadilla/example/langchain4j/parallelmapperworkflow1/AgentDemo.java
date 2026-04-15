@@ -69,6 +69,7 @@ public class AgentDemo {
                     new Person("Peach", "leo"));
 
             List<String> horoscopes = agent.generateHoroscopes(persons);
+
             horoscopes.stream().map(Format::markdown).forEach(System.out::println);
 
         }
