@@ -47,11 +47,14 @@ public class AgentDemo {
     }
 
     private static void ask(ExpertRouterAgent agent, String request) {
-        System.out.println("=".repeat(80));
-        System.out.println("Pregunta: " + request);
-        System.out.println("-".repeat(80));
-        String response = agent.ask(request);
-        System.out.println(Format.markdown(response));
+        print("");
+        print("Pregunta: " + request);
+        print(Format.sep());
+        print(agent.ask(request));
+    }
+
+    private static void print(String msg) {
+        System.out.println(Format.markdown(msg));
     }
 
 }
