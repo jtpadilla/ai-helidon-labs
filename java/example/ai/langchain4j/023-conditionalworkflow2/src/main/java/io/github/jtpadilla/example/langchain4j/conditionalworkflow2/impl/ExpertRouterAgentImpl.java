@@ -46,13 +46,13 @@ public class ExpertRouterAgentImpl {
         // ── Condicional de nivel 1: dispatch por categoría principal ─────────
         UntypedAgent mainDispatcher = AgenticServices.conditionalBuilder()
                 .subAgents(
-                    scope -> scope.readState("category", CategoryRequest.UNKNOWN) == CategoryRequest.MEDICAL,
+                    scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.MEDICAL,
                     medicalExpert)
                 .subAgents(
-                    scope -> scope.readState("category", CategoryRequest.UNKNOWN) == CategoryRequest.LEGAL,
+                    scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.LEGAL,
                     legalExpert)
                 .subAgents(
-                    scope -> scope.readState("category", CategoryRequest.UNKNOWN) == CategoryRequest.TECHNICAL,
+                    scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.TECHNICAL,
                     technicalSubWorkflow)
                 .build();
 

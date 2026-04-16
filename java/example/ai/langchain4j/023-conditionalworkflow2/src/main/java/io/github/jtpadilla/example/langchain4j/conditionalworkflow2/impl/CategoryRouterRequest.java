@@ -7,6 +7,6 @@ package io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl;
  * para decidir a qué experto delegar: médico, jurídico o técnico.
  * {@code UNKNOWN} se usa como valor por defecto cuando la categoría no ha sido escrita aún.
  */
-public enum CategoryRequest {
+public enum CategoryRouterRequest {
     LEGAL, MEDICAL, TECHNICAL, UNKNOWN
 }

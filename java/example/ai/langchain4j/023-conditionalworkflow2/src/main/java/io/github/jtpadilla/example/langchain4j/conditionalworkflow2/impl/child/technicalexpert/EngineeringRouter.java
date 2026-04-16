@@ -7,7 +7,7 @@ import dev.langchain4j.service.V;
 /**
  * Agente clasificador de segundo nivel para solicitudes técnicas.
  *
- * <p>Identifica la disciplina de ingeniería más adecuada ({@link EngineeringCategory})
+ * <p>Identifica la disciplina de ingeniería más adecuada ({@link EngineeringRouterCategory})
  * y escribe el resultado bajo la clave {@code "engineering_category"} del scope,
  * que es leída por el dispatcher condicional de nivel 2 en {@link TechnicalWorkflowImpl}.
  */
@@ -24,6 +24,6 @@ public interface EngineeringRouter {
     La solicitud técnica es: '{{request}}'.
     """)
     @Agent("Clasifica una solicitud técnica en la disciplina de ingeniería correspondiente")
-    EngineeringCategory classify(@V("request") String request);
+    EngineeringRouterCategory classify(@V("request") String request);
 
 }

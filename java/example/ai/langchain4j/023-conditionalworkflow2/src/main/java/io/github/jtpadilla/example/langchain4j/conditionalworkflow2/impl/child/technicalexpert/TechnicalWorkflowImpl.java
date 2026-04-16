@@ -38,16 +38,16 @@ public class TechnicalWorkflowImpl {
         // ── Condicional de nivel 2: dispatch por disciplina ─────────────────
         UntypedAgent engineeringDispatcher = AgenticServices.conditionalBuilder()
                 .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringCategory.UNKNOWN) == EngineeringCategory.SOFTWARE,
+                    scope -> scope.readState("engineering_category", EngineeringRouterCategory.UNKNOWN) == EngineeringRouterCategory.SOFTWARE,
                     softwareEngineer)
                 .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringCategory.UNKNOWN) == EngineeringCategory.HARDWARE,
+                    scope -> scope.readState("engineering_category", EngineeringRouterCategory.UNKNOWN) == EngineeringRouterCategory.HARDWARE,
                     hardwareEngineer)
                 .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringCategory.UNKNOWN) == EngineeringCategory.CIVIL,
+                    scope -> scope.readState("engineering_category", EngineeringRouterCategory.UNKNOWN) == EngineeringRouterCategory.CIVIL,
                     civilEngineer)
                 .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringCategory.UNKNOWN) == EngineeringCategory.MECHANICAL,
+                    scope -> scope.readState("engineering_category", EngineeringRouterCategory.UNKNOWN) == EngineeringRouterCategory.MECHANICAL,
                     mechanicalEngineer)
                 .build();
 

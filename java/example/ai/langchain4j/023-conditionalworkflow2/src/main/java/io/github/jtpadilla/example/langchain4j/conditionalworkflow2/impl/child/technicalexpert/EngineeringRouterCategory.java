@@ -7,6 +7,6 @@ package io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.child.
  * {@code "engineering_category"} para decidir a qué ingeniero especializado delegar.
  * {@code UNKNOWN} se usa como valor por defecto cuando la categoría no ha sido escrita aún.
  */
-public enum EngineeringCategory {
+public enum EngineeringRouterCategory {
     SOFTWARE, HARDWARE, CIVIL, MECHANICAL, UNKNOWN
 }
