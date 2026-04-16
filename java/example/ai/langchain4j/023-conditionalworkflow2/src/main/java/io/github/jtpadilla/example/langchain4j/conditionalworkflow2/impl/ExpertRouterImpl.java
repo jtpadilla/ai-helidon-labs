@@ -33,7 +33,7 @@ public class ExpertRouterImpl {
 
     public static ExpertRouter build(ChatModel chatModel) {
 
-        // Tres crean los tres agentes expertos en las materias soportadas
+        // Tres crean los agentes expertos en las materias soportadas
         MedicalExpert medicalExpert = MedicalExpertImpl.build(chatModel);
         LegalExpert legalExpert = LegalExpertImpl.build(chatModel);
         UntypedAgent technicalSubWorkflow = EngineeringRouterImpl.build(chatModel);
@@ -56,6 +56,7 @@ public class ExpertRouterImpl {
                 .subAgents(expertSelector, mainDispatcher)
                 .outputKey("response")
                 .build();
+
     }
 
 }

@@ -26,37 +26,32 @@ public class EngineeringRouterImpl {
 
     static public UntypedAgent build(ChatModel chatModel) {
 
-        // ── Router de disciplina de ingeniería ──────────────────────────────
-        EngineeringSelector engineeringSelector = EngineeringSelectorImpl.build(chatModel);
-
-        // ── Expertos de nivel 2 ─────────────────────────────────────────────
+        // Tres crean los agentes expertos en las materias soportadas
         SoftwareEngineer softwareEngineer = SoftwareEngineerImpl.build(chatModel);
         HardwareEngineer hardwareEngineer = HardwareEngineerImpl.build(chatModel);
         CivilEngineer civilEngineer = CivilEngineerImpl.build(chatModel);
         MechanicalEngineer mechanicalEngineer = MechanicalEngineerImpl.build(chatModel);
 
-        // ── Condicional de nivel 2: dispatch por disciplina ─────────────────
+        // Se crea el agente que determina la materia de la solicitud
+        EngineeringSelector engineeringSelector = EngineeringSelectorImpl.build(chatModel);
+
+        // Se crea el agente dispatcher condicional que en funcion de lo que este informado en el AgenticScope redirige la peticion
         UntypedAgent engineeringDispatcher = AgenticServices.conditionalBuilder()
-                .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.SOFTWARE,
-                    softwareEngineer)
-                .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.HARDWARE,
-                    hardwareEngineer)
-                .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.CIVIL,
-                    civilEngineer)
-                .subAgents(
-                    scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.MECHANICAL,
-                    mechanicalEngineer)
+                .subAgents(scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.SOFTWARE, softwareEngineer)
+                .subAgents(scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.HARDWARE, hardwareEngineer)
+                .subAgents(scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.CIVIL, civilEngineer)
+                .subAgents(scope -> scope.readState("engineering_category", EngineeringSelectorResult.UNKNOWN) == EngineeringSelectorResult.MECHANICAL, mechanicalEngineer)
                 .build();
 
-        // ── Secuencia: router de ingeniería → dispatch ──────────────────────
+        // Se secuencian los dis agentes:
+        //   - El primero deposita en la variable "engineering_category" sus conclusiones.
+        //   - El segundo en funcion de esta variable redirige al agente corespondiente.
         return AgenticServices
                 .sequenceBuilder(UntypedAgent.class)
                 .subAgents(engineeringSelector, engineeringDispatcher)
                 .outputKey("response")
                 .build();
+
     }
 
 }
