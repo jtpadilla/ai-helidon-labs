@@ -1,11 +1,15 @@
 package io.github.jtpadilla.example.langchain4j.conditionalworkflow2;
 
+import dev.langchain4j.agentic.observability.AgentMonitor;
+import dev.langchain4j.agentic.observability.HtmlReportGenerator;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import io.github.jtpadilla.example.format.Format;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.ExpertRouter;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.ExpertRouterImpl;
 import io.helidon.config.Config;
+
+import java.nio.file.Path;
 
 public class AgentDemo {
 
@@ -18,13 +22,15 @@ public class AgentDemo {
 
     public static void main(String[] args) {
 
+        AgentMonitor monitor = new AgentMonitor();
+
         ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MODEL)
                 .logRequestsAndResponses(true)
                 .build();
 
-        ExpertRouter agent = ExpertRouterImpl.build(chatModel);
+        ExpertRouter agent = ExpertRouterImpl.build(chatModel, monitor);
 
         // Caso técnico → ingeniería mecánica (automoción)
         ask(agent, "Me he roto el coche, ¿qué debo hacer?");
@@ -43,6 +49,8 @@ public class AgentDemo {
 
         // Caso técnico → ingeniería hardware
         ask(agent, "¿Cómo conecto un sensor de temperatura DS18B20 a un ESP32 con resistencia pull-up?");
+
+        HtmlReportGenerator.generateReport(monitor, Path.of(System.getProperty("user.home"), "023-conditionalworkflow2.html"));
 
     }
 

@@ -2,6 +2,7 @@ package io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl;
 
 import dev.langchain4j.agentic.AgenticServices;
 import dev.langchain4j.agentic.UntypedAgent;
+import dev.langchain4j.agentic.observability.AgentMonitor;
 import dev.langchain4j.model.chat.ChatModel;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.child.legalexpert.LegalExpert;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.child.legalexpert.LegalExpertImpl;
@@ -31,7 +32,7 @@ public class ExpertRouterImpl {
 
     private ExpertRouterImpl() {}
 
-    public static ExpertRouter build(ChatModel chatModel) {
+    public static ExpertRouter build(ChatModel chatModel, AgentMonitor agentMonitor) {
 
         // Tres crean los agentes expertos en las materias soportadas
         MedicalExpert medicalExpert = MedicalExpertImpl.build(chatModel);
@@ -53,6 +54,7 @@ public class ExpertRouterImpl {
         //   - El segundo en funcion de esta variable redirige al agente corespondiente.
         return AgenticServices
                 .sequenceBuilder(ExpertRouter.class)
+                .listener(agentMonitor)
                 .subAgents(expertSelector, mainDispatcher)
                 .outputKey("response")
                 .build();

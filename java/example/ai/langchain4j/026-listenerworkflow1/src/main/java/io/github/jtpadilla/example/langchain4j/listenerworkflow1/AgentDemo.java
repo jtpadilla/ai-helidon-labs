@@ -120,7 +120,7 @@ public class AgentDemo {
         String story = styledWriter.writeStoryWithStyle("dragons and wizards", "comedy");
         System.out.println(Format.markdown(story));
 
-        HtmlReportGenerator.generateReport(monitor, Path.of(System.getProperty("user.home"), "review-loop.html"));
+        HtmlReportGenerator.generateReport(monitor, Path.of(System.getProperty("user.home"), "026-listenerworkfklow1.html"));
 
     }
 
