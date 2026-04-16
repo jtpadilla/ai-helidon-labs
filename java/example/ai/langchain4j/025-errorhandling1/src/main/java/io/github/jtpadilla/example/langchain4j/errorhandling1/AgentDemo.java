@@ -73,6 +73,7 @@ public class AgentDemo {
 
         UntypedAgent creativeWriter = AgenticServices.agentBuilder()
                 .chatModel(chatModel)
+                .name("creativeWriter")
                 .description("Genera una historia basada en el tema indicado")
                 .userMessage("""
                 Eres un escritor creativo.
@@ -88,6 +89,7 @@ public class AgentDemo {
 
         UntypedAgent audienceEditor = AgenticServices.agentBuilder()
                 .chatModel(chatModel)
+                .name("audienceEditor")
                 .description("Edita una historia para adaptarla mejor al público indicado")
                 .userMessage("""
                 Eres un editor profesional.
@@ -105,6 +107,7 @@ public class AgentDemo {
 
         UntypedAgent styleEditor = AgenticServices.agentBuilder()
                 .chatModel(chatModel)
+                .name("styleEditor")
                 .description("Edita una historia para adaptarla mejor al estilo indicado")
                 .userMessage("""
                 Eres un editor profesional.
@@ -125,19 +128,18 @@ public class AgentDemo {
                 .errorHandler(errorContext -> {
 
                     // Se extraen los campos de ErrorContext
-                    final String agentName = errorContext.agentName();
-                    final AgenticScope agenticScope = errorContext.agenticScope();
                     final AgentInvocationException exception = errorContext.exception();
 
                     // Se verifica si es el caso de prueba
                     if (exception instanceof MissingArgumentException missingArgumentException) {
+                        // Es un Bug? No entra por aqui..
                         if (missingArgumentException.argumentName().equals("topic")) {
                             errorContext.agenticScope().writeState("topic", "ciencia ficcion galactica");
                             return ErrorRecoveryResult.retry();
                         }
                     }
 
-                    // No es el caso que yo he provocado
+                    // "dev.langchain4j.agentic.agent.AgentInvocationException: Failed to invoke agent method: public abstract java.lang.Object dev.langchain4j.agentic.UntypedAgent.invoke(java.util.Map)"
                     return ErrorRecoveryResult.throwException();
 
                 })
