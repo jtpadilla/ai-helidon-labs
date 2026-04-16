@@ -4,6 +4,13 @@ import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+/**
+ * Experto jurídico de nivel 1.
+ *
+ * <p>Se activa cuando el dispatcher condicional detecta {@code category == LEGAL}.
+ * Analiza la solicitud desde un punto de vista legal y escribe su respuesta
+ * bajo la clave {@code "response"} del scope.
+ */
 public interface LegalExpert {
 
     @UserMessage("""

@@ -12,6 +12,16 @@ import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.child.t
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.child.technicalexpert.child.softwareengineer.SoftwareEngineer;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.child.technicalexpert.child.softwareengineer.SoftwareEngineerImpl;
 
+/**
+ * Sub-flujo técnico de nivel 2.
+ *
+ * <p>Se activa cuando el dispatcher de nivel 1 detecta {@code category == TECHNICAL}.
+ * Internamente ejecuta una segunda secuencia:
+ * {@link EngineeringRouter} clasifica la disciplina → dispatcher condicional de nivel 2
+ * delega en el ingeniero especializado ({@link SoftwareEngineer}, {@link HardwareEngineer},
+ * {@link CivilEngineer} o {@link MechanicalEngineer}).
+ * El resultado final se escribe bajo la clave {@code "response"}.
+ */
 public class TechnicalWorkflowImpl {
 
     static public UntypedAgent build(ChatModel chatModel) {

@@ -4,6 +4,13 @@ import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+/**
+ * Agente clasificador de primer nivel.
+ *
+ * <p>Analiza el texto libre del usuario y lo clasifica en una de las categorías
+ * definidas en {@link CategoryRequest}. El resultado se escribe en el estado
+ * del scope bajo la clave {@code "category"}.
+ */
 public interface CategoryRouter {
 
     @UserMessage("""

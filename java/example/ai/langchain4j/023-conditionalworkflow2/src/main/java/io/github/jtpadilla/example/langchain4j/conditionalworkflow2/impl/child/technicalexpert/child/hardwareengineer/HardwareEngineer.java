@@ -4,6 +4,13 @@ import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+/**
+ * Experto en ingeniería de hardware de nivel 2.
+ *
+ * <p>Se activa cuando el dispatcher técnico detecta {@code engineering_category == HARDWARE}.
+ * Responde preguntas de electrónica, circuitos, sistemas embebidos y diseño de PCB.
+ * Escribe su respuesta bajo la clave {@code "response"} del scope.
+ */
 public interface HardwareEngineer {
 
     @UserMessage("""

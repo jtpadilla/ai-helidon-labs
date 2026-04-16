@@ -4,6 +4,13 @@ import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+/**
+ * Experto en ingeniería de software de nivel 2.
+ *
+ * <p>Se activa cuando el dispatcher técnico detecta {@code engineering_category == SOFTWARE}.
+ * Responde preguntas de programación, arquitectura, redes e inteligencia artificial.
+ * Escribe su respuesta bajo la clave {@code "response"} del scope.
+ */
 public interface SoftwareEngineer {
 
     @UserMessage("""

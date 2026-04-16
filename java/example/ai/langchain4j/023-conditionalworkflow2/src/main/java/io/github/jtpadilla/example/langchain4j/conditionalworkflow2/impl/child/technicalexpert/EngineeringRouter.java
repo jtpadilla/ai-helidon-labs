@@ -4,6 +4,13 @@ import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+/**
+ * Agente clasificador de segundo nivel para solicitudes técnicas.
+ *
+ * <p>Identifica la disciplina de ingeniería más adecuada ({@link EngineeringCategory})
+ * y escribe el resultado bajo la clave {@code "engineering_category"} del scope,
+ * que es leída por el dispatcher condicional de nivel 2 en {@link TechnicalWorkflowImpl}.
+ */
 public interface EngineeringRouter {
 
     @UserMessage("""
