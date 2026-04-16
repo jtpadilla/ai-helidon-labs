@@ -3,7 +3,10 @@ package io.github.jtpadilla.example.langchain4j.errorhandling1;
 import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.AgenticServices;
 import dev.langchain4j.agentic.UntypedAgent;
+import dev.langchain4j.agentic.agent.AgentInvocationException;
 import dev.langchain4j.agentic.agent.ErrorRecoveryResult;
+import dev.langchain4j.agentic.agent.MissingArgumentException;
+import dev.langchain4j.agentic.scope.AgenticScope;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.service.UserMessage;
@@ -120,17 +123,25 @@ public class AgentDemo {
                 .subAgents(creativeWriter, audienceEditor, styleEditor)
                 .outputKey("story")
                 .errorHandler(errorContext -> {
-                    Throwable cause = errorContext.exception();
-                    while (cause != null) {
-                        if (cause instanceof IllegalArgumentException &&
-                                cause.getMessage() != null &&
-                                cause.getMessage().contains("'topic'")) {
-                            errorContext.agenticScope().writeState("topic", "dragons and wizards");
+
+                    // Se extraen los campos de ErrorContext
+                    final String agentName = errorContext.agentName();
+                    final AgenticScope agenticScope = errorContext.agenticScope();
+                    final AgentInvocationException exception = errorContext.exception();
+
+                    // Se verifica si es el caso de prueba
+                    if (exception instanceof MissingArgumentException missingArgumentException) {
+
+                        String argumentName = missingArgumentException.argumentName();
+                        if ("topic".equals("topic")) {
+                            errorContext.agenticScope().writeState("topic", "ciencia ficcion galactica");
                             return ErrorRecoveryResult.retry();
                         }
-                        cause = cause.getCause();
                     }
+
+                    // No es el caso que yo he provocado
                     return ErrorRecoveryResult.throwException();
+
                 })
                 .build();
 
