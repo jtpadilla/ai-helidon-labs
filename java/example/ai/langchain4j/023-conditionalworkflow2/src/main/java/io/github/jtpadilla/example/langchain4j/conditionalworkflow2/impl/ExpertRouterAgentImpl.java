@@ -33,30 +33,24 @@ public class ExpertRouterAgentImpl {
 
     public static ExpertRouterAgent build(ChatModel chatModel) {
 
-        // ── Nivel 1: router de categoría principal ──────────────────────────
-        CategoryRouter categoryRouter = CategoryRouterImpl.build(chatModel);
-
-        // ── Expertos de nivel 1 ─────────────────────────────────────────────
+        // Tres crean los tres agentes expertos en las materias soportadas
         MedicalExpert medicalExpert = MedicalExpertImpl.build(chatModel);
         LegalExpert legalExpert = LegalExpertImpl.build(chatModel);
-
-        // ── Sub-flujo técnico (nivel 2) ─────────────────────────────────────
         UntypedAgent technicalSubWorkflow = TechnicalWorkflowImpl.build(chatModel);
 
-        // ── Condicional de nivel 1: dispatch por categoría principal ─────────
+        // Se crea el agente que determina la materia de la solicitud
+        CategoryRouter categoryRouter = CategoryRouterImpl.build(chatModel);
+
+        // Se crea el agente dispatcher condicional que en funcion de lo que este informado en el AgenticScope redirige la peticion
         UntypedAgent mainDispatcher = AgenticServices.conditionalBuilder()
-                .subAgents(
-                    scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.MEDICAL,
-                    medicalExpert)
-                .subAgents(
-                    scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.LEGAL,
-                    legalExpert)
-                .subAgents(
-                    scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.TECHNICAL,
-                    technicalSubWorkflow)
+                .subAgents(scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.MEDICAL, medicalExpert)
+                .subAgents(scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.LEGAL, legalExpert)
+                .subAgents(scope -> scope.readState("category", CategoryRouterRequest.UNKNOWN) == CategoryRouterRequest.TECHNICAL, technicalSubWorkflow)
                 .build();
 
-        // ── Secuencia principal: router de categoría → dispatch ──────────────
+        // Se secuencian los dis agentes:
+        //   - El primero deposita en la variable "category" sus conclusiones.
+        //   - El segundo en funcion de esta variable redirige al agente corespondiente.
         return AgenticServices
                 .sequenceBuilder(ExpertRouterAgent.class)
                 .subAgents(categoryRouter, mainDispatcher)
