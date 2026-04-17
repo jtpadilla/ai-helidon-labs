@@ -32,7 +32,7 @@ public class AgentDemo {
         SupervisorAgent supervisorAgent = SupervisorAgentImpl.build(chatModel, bankTool);
 
         ask(supervisorAgent, "Muéstrame una tabla con el estado de las cuentas.");
-        ask(supervisorAgent, "Trasfiere 100 EUR desde la cuenta de 'Mario' a la cuenta de 'Georgios'");
+        ask(supervisorAgent, "Trasfiere 100$ desde la cuenta de 'Mario' a la cuenta de 'Georgios'");
         ask(supervisorAgent, "Muéstrame como están ahora las cuentas.");
 
     }
