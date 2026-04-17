@@ -4,7 +4,7 @@ import dev.langchain4j.agentic.supervisor.SupervisorAgent;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import io.github.jtpadilla.example.util.Format;
-import io.github.jtpadilla.example.util.Models;
+import io.github.jtpadilla.example.util.GoogleModels;
 import io.github.jtpadilla.example.langchain4j.agenticpure1.agent.SupervisorAgentImpl;
 import io.github.jtpadilla.example.langchain4j.agenticpure1.tool.BankTool;
 import io.helidon.config.Config;
@@ -16,17 +16,17 @@ public class AgentDemo {
 
     public static void main(String[] args) {
 
-        Models models = Models.geminiSupervisorGemma26bAgents();
+        GoogleModels googleModels = GoogleModels.geminiSupervisorGemma26bAgents();
 
         ChatModel chatModel = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
-                .modelName(models.agent())
+                .modelName(googleModels.agent())
                 .logRequestsAndResponses(true)
                 .build();
 
         ChatModel chatModelThinking = GoogleAiGeminiChatModel.builder()
                 .apiKey(API_KEY)
-                .modelName(models.supervisor())
+                .modelName(googleModels.supervisor())
                 .logRequestsAndResponses(true)
                 .sendThinking(true)
                 .returnThinking(true)
