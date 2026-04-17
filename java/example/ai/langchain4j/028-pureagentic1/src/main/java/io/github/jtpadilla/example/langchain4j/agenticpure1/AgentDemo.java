@@ -29,7 +29,7 @@ public class AgentDemo {
 
         SupervisorAgent supervisorAgent = SupervisorAgentImpl.build(chatModel, bankTool);
 
-        supervisorAgent.invoke("Transfer 100 EUR from Mario's account to Georgios' one");
+        ask(supervisorAgent, "Transfer 100 EUR from Mario's account to Georgios' one");
 
     }
 
