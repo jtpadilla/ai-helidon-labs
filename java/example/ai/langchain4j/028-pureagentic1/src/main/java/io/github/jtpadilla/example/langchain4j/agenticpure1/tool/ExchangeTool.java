@@ -19,7 +19,7 @@ public class ExchangeTool {
             "MXN", 0.052
     );
 
-    @Tool("Exchange the given amount of money from the original to the target currency")
+    @Tool("Convierte la cantidad indicada de dinero de la divisa original a la divisa destino")
     Double exchange(
             @P("originalCurrency") String originalCurrency,
             @P("amount") Double amount,

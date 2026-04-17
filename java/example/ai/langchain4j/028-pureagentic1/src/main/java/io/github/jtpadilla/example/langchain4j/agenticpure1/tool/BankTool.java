@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class BankTool {
 
+    private static final String CTX = "El banco opera exclusivamente en euros (EUR). ";
+
     private final Map<String, Double> accounts = new HashMap<>();
 
     public void createAccount(String user, Double initialBalance) {
@@ -17,8 +19,8 @@ public class BankTool {
         accounts.put(user, initialBalance);
     }
 
-    @Tool("Get the current balance of the given user account")
-    public Double getBalance(@P("user name") String user) {
+    @Tool(CTX + "Obtiene el saldo actual de la cuenta del usuario indicado")
+    public Double getBalance(@P("nombre de usuario") String user) {
         Double balance = accounts.get(user);
         if (balance == null) {
             throw new RuntimeException("No balance found for user " + user);
@@ -26,7 +28,7 @@ public class BankTool {
         return balance;
     }
 
-    @Tool("List all accounts with their current balances as a formatted string")
+    @Tool(CTX + "Lista todas las cuentas con sus saldos actuales como cadena de texto formateada")
     public String listAccounts() {
         if (accounts.isEmpty()) {
             return "No accounts found.";
@@ -37,8 +39,8 @@ public class BankTool {
         return sb.toString();
     }
 
-    @Tool("Credit the given user with the given amount and return the new balance")
-    Double credit(@P("user name") String user, @P("amount") Double amount) {
+    @Tool("Abona al usuario indicado la cantidad especificada y devuelve el nuevo saldo")
+    Double credit(@P("nombre de usuario") String user, @P("amount") Double amount) {
         Double balance = accounts.get(user);
         if (balance == null) {
             throw new RuntimeException("No balance found for user " + user);
@@ -48,8 +50,8 @@ public class BankTool {
         return newBalance;
     }
 
-    @Tool("Withdraw the given amount with the given user and return the new balance")
-    Double withdraw(@P("user name") String user, @P("amount") Double amount) {
+    @Tool("Retira la cantidad indicada de la cuenta del usuario y devuelve el nuevo saldo")
+    Double withdraw(@P("nombre de usuario") String user, @P("amount") Double amount) {
         Double balance = accounts.get(user);
         if (balance == null) {
             throw new RuntimeException("No balance found for user " + user);

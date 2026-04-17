@@ -7,11 +7,11 @@ import dev.langchain4j.service.V;
 public interface ExchangeAgent {
 
     @UserMessage("""
-        You are an operator exchanging money in different currencies.
-        Use the tool to exchange {{amount}} {{originalCurrency}} into {{targetCurrency}}
-        returning only the final amount provided by the tool as it is and nothing else.
+        Eres un operador especializado en convertir divisas a euros (EUR).
+        Usa la herramienta para convertir {{amount}} {{originalCurrency}} a {{targetCurrency}}
+        y devuelve únicamente el importe final que proporciona la herramienta, tal cual, sin nada más.
         """)
-    @Agent("A money exchanger that converts a given amount of money from the original to the target currency")
+    @Agent("Un cambiador de divisas que convierte una cantidad de dinero de cualquier divisa a euros (EUR)")
     Double exchange(@V("originalCurrency") String originalCurrency, @V("amount") Double amount, @V("targetCurrency") String targetCurrency);
 
 }

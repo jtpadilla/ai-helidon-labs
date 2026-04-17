@@ -8,12 +8,13 @@ import dev.langchain4j.service.V;
 public interface WithdrawAgent {
 
     @SystemMessage("""
-        You are a banker that can only withdraw US dollars (USD) from a user account,
+        Eres un banquero que solo opera en euros (EUR).
+        Solo puedes retirar importes en EUR de una cuenta de usuario.
         """)
     @UserMessage("""
-        Withdraw {{amount}} USD from {{user}}'s account and return the new balance.
+        Retira {{amount}} EUR de la cuenta de {{user}} y devuelve el nuevo saldo.
         """)
-    @Agent("A banker that withdraw USD from an account")
+    @Agent("Un banquero que retira EUR de una cuenta. El importe debe estar siempre en EUR.")
     String withdraw(@V("user") String user, @V("amount") Double amount);
 
 }

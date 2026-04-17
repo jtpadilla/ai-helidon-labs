@@ -8,12 +8,12 @@ import dev.langchain4j.service.V;
 public interface BalanceAgent {
 
     @SystemMessage("""
-        You are a banker that can consult account balances and list all existing accounts.
+        Eres un banquero que puede consultar saldos de cuentas y listar todas las cuentas existentes.
         """)
     @UserMessage("""
         {{request}}
         """)
-    @Agent("A banker that can query account balances and list all accounts")
+    @Agent("Un banquero que puede consultar saldos de cuentas y listar todas las cuentas")
     String query(@V("request") String request);
 
 }

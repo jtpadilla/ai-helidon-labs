@@ -28,7 +28,13 @@ public class SupervisorAgentImpl {
                 .supervisorBuilder()
                 .chatModel(chatModel)
                 //.chatModel(PLANNER_MODEL) // En el ejemplo original habla de este modelo pero no se en que se diferencia.
-                .supervisorContext("Always respond to the user in Spanish.")
+                .supervisorContext("""
+                        Todas las operaciones bancarias se realizan exclusivamente en euros (EUR).
+                        Si el usuario solicita una operación con un importe en otra divisa, utiliza primero
+                        el agente de cambio para convertir dicho importe a EUR y usa el resultado para
+                        la operación bancaria correspondiente.
+                        Responde siempre al usuario en español.
+                        """)
                 .subAgents(balanceAgent, withdrawAgent, creditAgent, exchangeAgent)
                 .responseStrategy(SupervisorResponseStrategy.SUMMARY)
                 .build();
