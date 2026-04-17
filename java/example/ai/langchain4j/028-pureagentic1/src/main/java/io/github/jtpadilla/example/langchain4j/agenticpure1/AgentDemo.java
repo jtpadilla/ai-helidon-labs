@@ -10,7 +10,8 @@ import io.helidon.config.Config;
 
 public class AgentDemo {
 
-    final static private String MODEL = "gemini-3.1-flash-lite-preview";
+    final static private String MODEL = "gemini-3.1-flash-lite-preview"; // 18 segundos
+//    final static private String MODEL = "gemma-4-31b-it"; // 1 minuto y 32 segundos.
 
     final static private String API_KEY = Config.global().get("gemini-api-key").asString().orElseThrow(
             () -> new IllegalStateException("Configuration key 'gemini-api-key' is required"));
