@@ -1,4 +1,4 @@
-package io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1;
+package io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.planner;
 
 import dev.langchain4j.agentic.planner.*;
 
