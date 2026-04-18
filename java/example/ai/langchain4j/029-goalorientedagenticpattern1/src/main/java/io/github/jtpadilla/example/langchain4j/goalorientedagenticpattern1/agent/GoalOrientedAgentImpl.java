@@ -3,7 +3,6 @@ package io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agen
 import dev.langchain4j.agentic.AgenticServices;
 import dev.langchain4j.agentic.UntypedAgent;
 import dev.langchain4j.model.chat.ChatModel;
-import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.planner.GoalOrientedPlanner;
 import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent.horoscopegenerator.HoroscopeGenerator;
 import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent.horoscopegenerator.HoroscopeGeneratorImpl;
 import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent.personextractor.PersonExtractor;
@@ -14,6 +13,7 @@ import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent
 import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent.storyfinder.StoryFinderImpl;
 import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent.writer.Writer;
 import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.agent.writer.WriterImpl;
+import io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.planner.GoalOrientedPlanner;
 
 public class GoalOrientedAgentImpl {
 

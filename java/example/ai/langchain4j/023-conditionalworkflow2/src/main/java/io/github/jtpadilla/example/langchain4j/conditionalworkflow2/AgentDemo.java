@@ -4,9 +4,9 @@ import dev.langchain4j.agentic.observability.AgentMonitor;
 import dev.langchain4j.agentic.observability.HtmlReportGenerator;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
-import io.github.jtpadilla.example.util.Format;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.ExpertRouter;
 import io.github.jtpadilla.example.langchain4j.conditionalworkflow2.impl.ExpertRouterImpl;
+import io.github.jtpadilla.example.util.Format;
 import io.helidon.config.Config;
 
 import java.nio.file.Path;
