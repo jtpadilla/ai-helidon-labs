@@ -3,6 +3,7 @@ package io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1.plan
 import dev.langchain4j.agentic.planner.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 // Planner dirigido por objetivo: resuelve el camino de agentes una vez y lo recorre en orden.
 public class GoalOrientedPlanner implements Planner {
@@ -26,6 +27,13 @@ public class GoalOrientedPlanner implements Planner {
     public Action firstAction(PlanningContext planningContext) {
         // El estado inicial del scope contiene las claves del input original (p.ej. "prompt")
         path = graph.search(planningContext.agenticScope().state().keySet(), goal);
+
+        // Quiero imprimir la ruta
+        String collect = path.stream()
+                .map(AgentInstance::name)
+                .collect(Collectors.joining("->"));
+        System.out.println(collect);
+
         if (path.isEmpty()) {
             throw new IllegalStateException("No se encontró ningún camino hacia el objetivo: " + goal);
         }
