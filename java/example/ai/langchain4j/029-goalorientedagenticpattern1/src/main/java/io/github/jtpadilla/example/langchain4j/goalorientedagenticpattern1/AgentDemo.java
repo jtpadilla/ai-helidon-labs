@@ -2,7 +2,7 @@ package io.github.jtpadilla.example.langchain4j.goalorientedagenticpattern1;
 
 import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.AgenticServices;
-import dev.langchain4j.agentic.supervisor.SupervisorAgent;
+import dev.langchain4j.agentic.UntypedAgent;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.service.SystemMessage;
@@ -18,6 +18,7 @@ import io.helidon.config.Config;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 public class AgentDemo {
 
@@ -39,7 +40,8 @@ public class AgentDemo {
         PISCIS
     }
 
-    public record Person(String name, String horoscope) {}
+    public record Person(String name, String horoscope) {
+    }
 
     public interface HoroscopeGenerator {
         @SystemMessage("You are an astrologist that generates horoscopes based on the user's name and zodiac sign.")
@@ -64,10 +66,10 @@ public class AgentDemo {
 
     public interface Writer {
         @UserMessage("""
-            Create an amusing writeup for {{person}} based on the following:
-            - their horoscope: {{horoscope}}
-            - a current news story: {{story}}
-            """)
+                Create an amusing writeup for {{person}} based on the following:
+                - their horoscope: {{horoscope}}
+                - a current news story: {{story}}
+                """)
         @Agent("Create an amusing writeup for the target person based on their horoscope and current news stories")
         String write(@V("person") Person person, @V("horoscope") String horoscope, @V("story") String story);
     }
@@ -75,12 +77,12 @@ public class AgentDemo {
     public interface StoryFinder {
 
         @SystemMessage("""
-            You're a story finder, use the provided web search tools, calling it once and only once,
-            to find a fictional and funny story on the internet about the user provided topic.
-            """)
+                You're a story finder, use the provided web search tools, calling it once and only once,
+                to find a fictional and funny story on the internet about the user provided topic.
+                """)
         @UserMessage("""
-            Find a story on the internet for {{person}} who has the following horoscope: {{horoscope}}.
-            """)
+                Find a story on the internet for {{person}} who has the following horoscope: {{horoscope}}.
+                """)
         @Agent("Find a story on the internet for a given person with a given horoscope")
         String findStory(@V("person") Person person, @V("horoscope") String horoscope);
     }
@@ -129,25 +131,17 @@ public class AgentDemo {
                 .outputKey("story")
                 .build();
 
-        SupervisorAgent supervisorAgent = AgenticServices.supervisorBuilder()
-                .chatModel(chatModel)
+        UntypedAgent horoscopeAgent = AgenticServices.plannerBuilder()
                 .subAgents(horoscopeGenerator, personExtractor, signExtractor, writer, storyFinder)
                 .outputKey("writeup")
+                .planner(GoalOrientedPlanner::new)
                 .build();
 
-        ask(supervisorAgent, "Mi nombre es Alejandro y soy Sagitario. Dame algo divertido para leer.");
+        Map<String, Object> input = Map.of("prompt", "My name is Mario and my zodiac sign is pisces");
+        String writeup = (String) horoscopeAgent.invoke(input);
+        System.out.println(Format.markdown(writeup));
 
-    }
-
-    private static void ask(SupervisorAgent supervisorAgent, String request) {
-        print("");
-        print("Pregunta: " + request);
-        print(Format.sep());
-        print(supervisorAgent.invoke(request));
-    }
-
-    private static void print(String msg) {
-        System.out.println(Format.markdown(msg));
     }
 
 }
+
