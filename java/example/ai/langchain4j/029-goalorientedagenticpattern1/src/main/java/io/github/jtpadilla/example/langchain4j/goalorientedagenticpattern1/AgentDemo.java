@@ -23,7 +23,7 @@ import java.util.Map;
 public class AgentDemo {
 
     final static private String API_KEY = Config.global().get("gemini-api-key").asString().orElseThrow(
-            () -> new IllegalStateException("Configuration key 'gemini-api-key' is required"));
+            () -> new IllegalStateException("La clave de configuración 'gemini-api-key' es obligatoria"));
 
     public enum Sign {
         ARIES,
@@ -44,46 +44,47 @@ public class AgentDemo {
     }
 
     public interface HoroscopeGenerator {
-        @SystemMessage("You are an astrologist that generates horoscopes based on the user's name and zodiac sign.")
-        @UserMessage("Generate the horoscope for {{person}} who is a {{sign}}.")
-        @Agent("An astrologist that generates horoscopes based on the user's name and zodiac sign.")
+        @SystemMessage("Eres un astrólogo que genera horóscopos basándose en el nombre y el signo zodiacal del usuario.")
+        @UserMessage("Genera el horóscopo para {{person}} que es {{sign}}.")
+        @Agent("Un astrólogo que genera horóscopos basándose en el nombre y el signo zodiacal del usuario.")
         String horoscope(@V("person") Person person, @V("sign") Sign sign);
     }
 
     public interface PersonExtractor {
 
-        @UserMessage("Extract a person from the following prompt: {{prompt}}")
-        @Agent("Extract a person from user's prompt")
+        @UserMessage("Extrae una persona del siguiente texto: {{prompt}}")
+        @Agent("Extrae una persona del texto del usuario")
         Person extractPerson(@V("prompt") String prompt);
     }
 
     public interface SignExtractor {
 
-        @UserMessage("Extract the zodiac sign of a person from the following prompt: {{prompt}}")
-        @Agent("Extract a person from user's prompt")
+        @UserMessage("Extrae el signo zodiacal de una persona del siguiente texto: {{prompt}}")
+        @Agent("Extrae el signo zodiacal del texto del usuario")
         Sign extractSign(@V("prompt") String prompt);
     }
 
     public interface Writer {
         @UserMessage("""
-                Create an amusing writeup for {{person}} based on the following:
-                - their horoscope: {{horoscope}}
-                - a current news story: {{story}}
+                Crea un texto divertido para {{person}} basándote en lo siguiente:
+                - su horóscopo: {{horoscope}}
+                - una noticia actual: {{story}}
                 """)
-        @Agent("Create an amusing writeup for the target person based on their horoscope and current news stories")
+        @Agent("Crea un texto divertido para la persona objetivo basándose en su horóscopo y noticias actuales")
         String write(@V("person") Person person, @V("horoscope") String horoscope, @V("story") String story);
     }
 
     public interface StoryFinder {
 
         @SystemMessage("""
-                You're a story finder, use the provided web search tools, calling it once and only once,
-                to find a fictional and funny story on the internet about the user provided topic.
+                Eres un buscador de historias. Usa las herramientas de búsqueda web proporcionadas,
+                llamándolas una única vez, para encontrar una historia ficticia y divertida en internet
+                sobre el tema indicado por el usuario.
                 """)
         @UserMessage("""
-                Find a story on the internet for {{person}} who has the following horoscope: {{horoscope}}.
+                Busca en internet una historia para {{person}} que tiene el siguiente horóscopo: {{horoscope}}.
                 """)
-        @Agent("Find a story on the internet for a given person with a given horoscope")
+        @Agent("Busca en internet una historia para una persona dado su horóscopo")
         String findStory(@V("person") Person person, @V("horoscope") String horoscope);
     }
 
@@ -137,7 +138,7 @@ public class AgentDemo {
                 .planner(GoalOrientedPlanner::new)
                 .build();
 
-        Map<String, Object> input = Map.of("prompt", "My name is Mario and my zodiac sign is pisces");
+        Map<String, Object> input = Map.of("prompt", "Me llamo Mario y mi signo zodiacal es piscis");
         String writeup = (String) horoscopeAgent.invoke(input);
         System.out.println(Format.markdown(writeup));
 

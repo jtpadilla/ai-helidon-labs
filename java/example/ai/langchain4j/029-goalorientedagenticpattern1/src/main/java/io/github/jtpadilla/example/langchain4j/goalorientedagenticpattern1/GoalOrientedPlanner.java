@@ -23,7 +23,7 @@ public class GoalOrientedPlanner implements Planner {
     public Action firstAction(PlanningContext planningContext) {
         path = graph.search(planningContext.agenticScope().state().keySet(), goal);
         if (path.isEmpty()) {
-            throw new IllegalStateException("No path found for goal: " + goal);
+            throw new IllegalStateException("No se encontró ningún camino hacia el objetivo: " + goal);
         }
         return call(path.get(agentCursor++));
     }
