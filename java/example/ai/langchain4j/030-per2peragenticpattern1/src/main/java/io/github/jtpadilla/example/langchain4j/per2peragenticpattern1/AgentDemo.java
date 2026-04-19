@@ -24,7 +24,7 @@ public class AgentDemo {
                 .build();
 
         ResearchAgent researcher = ResearchAgentImpl.build(chatModel);
-        String hypothesis = researcher.research("black holes");
+        String hypothesis = researcher.research("agujeros negros");
         System.out.println(Format.markdown(hypothesis));
 
     }
