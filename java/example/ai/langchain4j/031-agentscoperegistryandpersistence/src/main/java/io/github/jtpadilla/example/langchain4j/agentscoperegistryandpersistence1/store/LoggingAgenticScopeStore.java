@@ -45,4 +45,5 @@ public class LoggingAgenticScopeStore implements AgenticScopeStore {
     public Set<AgenticScopeKey> getAllKeys() {
         return Collections.unmodifiableSet(store.keySet());
     }
+
 }
