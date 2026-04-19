@@ -1,4 +1,4 @@
-package io.github.jtpadilla.example.langchain4j.per2peragenticpattern1;
+package io.github.jtpadilla.example.langchain4j.per2peragenticpattern1.planner;
 
 import dev.langchain4j.agentic.planner.*;
 import dev.langchain4j.agentic.scope.AgenticScope;
@@ -8,16 +8,18 @@ import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toMap;
 
+// Planificador P2P (peer-to-peer): activa en paralelo todos los agentes cuyas entradas
+// ya están disponibles en el scope, iterando hasta que se cumpla la condición de salida.
 public class P2PPlanner implements Planner {
 
-    private final int maxAgentsInvocations;
+    private final int maxAgentInvocations;
     private final Predicate<AgenticScope> exitCondition;
 
     private int invocationCounter = 0;
     private Map<String, AgentActivator> agentActivators;
 
-    public P2PPlanner(int maxAgentsInvocations, Predicate<AgenticScope> exitCondition) {
-        this.maxAgentsInvocations = maxAgentsInvocations;
+    public P2PPlanner(int maxAgentInvocations, Predicate<AgenticScope> exitCondition) {
+        this.maxAgentInvocations = maxAgentInvocations;
         this.exitCondition = exitCondition;
     }
 
@@ -41,16 +43,16 @@ public class P2PPlanner implements Planner {
             return done();
         }
 
-        AgentActivator lastExecutedAgent = agentActivators.get(planningContext.previousAgentInvocation().agentId());
-        lastExecutedAgent.finishExecution();
-        agentActivators.values().forEach(a -> a.onStateChanged(lastExecutedAgent.agent().outputKey()));
+        AgentActivator last = agentActivators.get(planningContext.previousAgentInvocation().agentId());
+        last.finishExecution();
+        agentActivators.values().forEach(a -> a.onStateChanged(last.agent().outputKey()));
 
         return nextCallAction(planningContext.agenticScope());
     }
 
     private Action nextCallAction(AgenticScope agenticScope) {
         AgentInstance[] agentsToCall = agentActivators.values().stream()
-                .filter(agentActivator -> agentActivator.canActivate(agenticScope))
+                .filter(a -> a.canActivate(agenticScope))
                 .peek(AgentActivator::startExecution)
                 .map(AgentActivator::agent)
                 .toArray(AgentInstance[]::new);
@@ -59,9 +61,10 @@ public class P2PPlanner implements Planner {
     }
 
     private boolean terminated(AgenticScope agenticScope) {
-        return invocationCounter > maxAgentsInvocations || exitCondition.test(agenticScope);
+        return invocationCounter > maxAgentInvocations || exitCondition.test(agenticScope);
     }
 
+    // Envuelve un AgentInstance con estado de activación para el ciclo P2P.
     private static class AgentActivator {
 
         private enum State { IDLE, RUNNING, DONE }
@@ -77,6 +80,7 @@ public class P2PPlanner implements Planner {
             return agentInstance;
         }
 
+        // Puede activarse si está IDLE y todas sus entradas requeridas están en el scope.
         boolean canActivate(AgenticScope scope) {
             return state == State.IDLE
                     && agentInstance.arguments().stream()
@@ -92,9 +96,8 @@ public class P2PPlanner implements Planner {
         }
 
         void onStateChanged(String key) {
-            // no-op: canActivate re-evaluates on demand
+            // no-op: canActivate re-evalúa sobre el scope en cada ciclo
         }
-
     }
 
 }

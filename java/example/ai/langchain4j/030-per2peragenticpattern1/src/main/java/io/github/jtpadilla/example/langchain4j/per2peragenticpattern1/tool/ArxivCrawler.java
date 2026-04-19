@@ -1,4 +1,4 @@
-package io.github.jtpadilla.example.langchain4j.per2peragenticpattern1;
+package io.github.jtpadilla.example.langchain4j.per2peragenticpattern1.tool;
 
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+// Tool que consulta la API pública de arXiv (Atom/XML) para buscar y recuperar papers científicos.
 public class ArxivCrawler {
 
     private static final String ARXIV_API = "https://export.arxiv.org/api/query";
@@ -47,7 +48,7 @@ public class ArxivCrawler {
         }
     }
 
-    @Tool("Fetch the abstract and metadata of a specific arXiv paper by its ID (e.g. '2301.07041' or full URL).")
+    @Tool("Fetch the abstract and metadata of a specific arXiv paper by its ID (e.g. '2301.07041') or full URL.")
     public String getPaper(@P("arXiv paper ID or full arXiv URL") String arxivId) {
         String id = arxivId.replaceAll(".*/abs/", "").replaceAll("v\\d+$", "").strip();
         String url = ARXIV_API + "?id_list=" + URLEncoder.encode(id, StandardCharsets.UTF_8);
@@ -78,21 +79,13 @@ public class ArxivCrawler {
         var sb = new StringBuilder();
         for (int i = 0; i < entries.getLength(); i++) {
             Node entry = entries.item(i);
-
-            String title     = childText(entry, "title");
-            String summary   = childText(entry, "summary");
-            String published = childText(entry, "published");
-            String paperId   = childText(entry, "id");
-            List<String> authors = collectAuthors(entry);
-
             sb.append("### Paper ").append(i + 1).append('\n');
-            sb.append("Title: ").append(title.strip()).append('\n');
-            sb.append("Authors: ").append(String.join(", ", authors)).append('\n');
-            sb.append("Published: ").append(published.strip()).append('\n');
-            sb.append("URL: ").append(paperId.strip()).append('\n');
-            sb.append("Abstract: ").append(summary.strip()).append('\n').append('\n');
+            sb.append("Title: ").append(childText(entry, "title").strip()).append('\n');
+            sb.append("Authors: ").append(String.join(", ", collectAuthors(entry))).append('\n');
+            sb.append("Published: ").append(childText(entry, "published").strip()).append('\n');
+            sb.append("URL: ").append(childText(entry, "id").strip()).append('\n');
+            sb.append("Abstract: ").append(childText(entry, "summary").strip()).append('\n').append('\n');
         }
-
         return sb.toString();
     }
 
@@ -102,9 +95,7 @@ public class ArxivCrawler {
             NodeList authorNodes = el.getElementsByTagNameNS("*", "author");
             for (int j = 0; j < authorNodes.getLength(); j++) {
                 String name = childText(authorNodes.item(j), "name");
-                if (!name.isBlank()) {
-                    names.add(name.strip());
-                }
+                if (!name.isBlank()) names.add(name.strip());
             }
         }
         return names;
