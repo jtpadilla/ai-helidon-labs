@@ -42,19 +42,23 @@ public class ToolDemo {
     static final UserMessage firstMessage = UserMessage.from("What will the weather be like in London tomorrow?");
 
     public static void main(String[] args) {
+
+        // Primera petición con su respuesta
         ChatResponse firstChatResponse = sendFirstRequest();
+
+        // Se procesa con la primera respuesta la herramienta solicitada
         List<ToolExecutionResultMessage> toolExecutionResultMessages = executeTools(firstChatResponse);
+
+        // Segunda petition con la primera pregunta + primera respuesta + resultado herramienta solicitada.
         ChatResponse secondChatResponse = sendSecondRequest(firstChatResponse.aiMessage(), toolExecutionResultMessages);
         System.out.println(secondChatResponse.aiMessage().text());
     }
 
     static private ChatResponse sendFirstRequest() {
-
         final ChatRequest request = ChatRequest.builder()
                 .messages(firstMessage)
                 .toolSpecifications(List.of(toolSpecification))
                 .build();
-
         return chatModel.chat(request);
     }
 
