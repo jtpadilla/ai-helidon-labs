@@ -1,8 +1,12 @@
 package io.github.jtpadilla.example.langchain4j.toolspecification;
 
 import dev.langchain4j.agent.tool.ToolSpecification;
+import dev.langchain4j.data.message.AiMessage;
+import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.chat.request.ChatRequest;
 import dev.langchain4j.model.chat.request.json.JsonObjectSchema;
+import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import io.github.jtpadilla.example.util.GoogleModels;
 import io.helidon.config.Config;
@@ -16,6 +20,11 @@ public class ToolDemo {
 
     public static void main(String[] args) {
 
+        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
+                .apiKey(API_KEY)
+                .modelName(GoogleModels.geminiFlashLite())
+                .build();
+
         ToolSpecification toolSpecification = ToolSpecification.builder()
                 .name("getWeather")
                 .description("Returns the weather forecast for a given city")
@@ -26,24 +35,16 @@ public class ToolDemo {
                         .build())
                 .build();
 
-        ChatModel chatModel = GoogleAiGeminiChatModel.builder()
-                .apiKey(API_KEY)
-                .modelName(GoogleModels.geminiFlashLite())
+        ChatRequest request = ChatRequest.builder()
+                .messages(UserMessage.from("What will the weather be like in London tomorrow?"))
+                .toolSpecifications(List.of(toolSpecification))
                 .build();
 
-    }
+        ChatResponse response = chatModel.chat(request);
 
-    /*
-    private static void ask(SupportAgent agent, String sessionId, String question) {
-        System.out.printf("%n[%s] %s%n", sessionId, question);
-        String solution = agent.handle(sessionId, question);
-        System.out.printf("[→%s] %s%n", sessionId, solution);
-    }
+        AiMessage aiMessage = response.aiMessage();
 
-    private static void sep(String title) {
-        System.out.printf("%n────────────── %s ─────────────%n", title);
-    }
 
-     */
+    }
 
 }
