@@ -1,5 +1,6 @@
 package io.github.jtpadilla.example.langchain4j.toolspecification;
 
+import dev.langchain4j.agent.tool.ToolExecutionRequest;
 import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ChatMessage;
@@ -58,17 +59,24 @@ public class ToolDemo {
     }
 
     static private List<ToolExecutionResultMessage> executeTools(ChatResponse chatResponse) {
+
         final AiMessage aiMessage = chatResponse.aiMessage();
-        System.out.println("Hay petición de herramienta?: " + aiMessage.hasToolExecutionRequests());
-        return aiMessage.toolExecutionRequests().stream()
-                .map(toolExecutionRequest -> {
-                    System.out.println("Herramienta invocada: " + toolExecutionRequest.name());
-                    System.out.println("Argumentos          : " + toolExecutionRequest.arguments());
-                    String result = WeatherTool.execute(toolExecutionRequest.arguments());
-                    System.out.println("Resultado           : " + result);
-                    return ToolExecutionResultMessage.from(toolExecutionRequest, result);
-                })
-                .toList();
+
+        final List<ToolExecutionRequest> toolExecutionRequests = aiMessage.toolExecutionRequests();
+        System.out.println("Hay peticiónes de herramientas?: " + aiMessage.hasToolExecutionRequests());
+
+        if (toolExecutionRequests.size() == 1 && toolExecutionRequests.getFirst().name().equals("getWeather")) {
+            ToolExecutionRequest toolExecutionRequest = toolExecutionRequests.getFirst();
+            System.out.println("Herramienta invocada: " + toolExecutionRequest.name());
+            System.out.println("Argumentos          : " + toolExecutionRequest.arguments());
+            String result = WeatherTool.execute(toolExecutionRequest.arguments());
+            System.out.println("Resultado           : " + result);
+            final ToolExecutionResultMessage resultMessage = ToolExecutionResultMessage.from(toolExecutionRequest, result);
+            return List.of(resultMessage);
+        } else {
+            throw new IllegalStateException("No esta la tool solicitada disponible.");
+        }
+
     }
 
     static private ChatResponse sendSecondRequest(AiMessage firstResponseAi, List<ToolExecutionResultMessage> toolResults) {
