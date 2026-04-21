@@ -42,7 +42,12 @@ public class Filter {
         // Se inicializa la instancia de la tool con la lista de ciudades)
         final FilterLocationsTool filterLocationsTool = new FilterLocationsTool(ciudades);
 
-        HashMap<String, ToolExecutor> tools = new HashMap<>(Map.of(GetCurrentTimeTool.NAME, GetCurrentTimeTool.executor(), FilterLocationsTool.NAME, filterLocationsTool.executor()));
+        final HashMap<String, ToolExecutor> tools = new HashMap<>(
+                Map.of(
+                        GetCurrentTimeTool.NAME, GetCurrentTimeTool.executor(),
+                        FilterLocationsTool.NAME, filterLocationsTool.executor()
+                )
+        );
         FilterService service = AiServices.builder(FilterService.class)
                 .chatModel(chatModel)
                 .tools(tools)
