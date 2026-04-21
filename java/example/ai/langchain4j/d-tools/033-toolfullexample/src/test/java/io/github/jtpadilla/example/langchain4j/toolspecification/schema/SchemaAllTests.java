@@ -7,7 +7,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         CityDataSchemaTest.class,
         CityDataListSchemaTest.class,
-        CityListSchemaTest.class
+        CityListSchemaTest.class,
+        EmptySchemaTest.class,
+        LocalDateTimeSchemaTest.class
 })
 public class SchemaAllTests {
 }
