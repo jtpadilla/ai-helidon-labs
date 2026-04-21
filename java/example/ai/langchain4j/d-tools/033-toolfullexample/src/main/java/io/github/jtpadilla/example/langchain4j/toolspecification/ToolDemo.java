@@ -27,8 +27,6 @@ public class ToolDemo {
             .allowGoogleSearch(true)
             .build();
 
-    static final ToolDemo service = new ToolDemo();
-
     public static void main(String[] args) {
         try {
             final TemperatureQueryResult result = query(

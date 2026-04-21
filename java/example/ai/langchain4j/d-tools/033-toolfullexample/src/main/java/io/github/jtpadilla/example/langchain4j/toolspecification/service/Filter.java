@@ -4,8 +4,8 @@ import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.SystemMessage;
 import io.github.jtpadilla.example.langchain4j.toolspecification.schema.CityDataListSchema;
-import io.github.jtpadilla.example.langchain4j.toolspecification.tool.GetCurrentTimeTool;
 import io.github.jtpadilla.example.langchain4j.toolspecification.tool.FilterLocationsTool;
+import io.github.jtpadilla.example.langchain4j.toolspecification.tool.GetCurrentTimeTool;
 import io.github.jtpadilla.example.util.SchemaException;
 
 import java.util.List;
