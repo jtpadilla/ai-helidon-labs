@@ -1,44 +1,21 @@
-package io.github.jtpadilla.example.langchain4j.toolspecification;
+package io.github.jtpadilla.example.langchain4j.toolspecification.impl;
 
 import dev.langchain4j.model.chat.ChatModel;
-import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import io.github.jtpadilla.example.langchain4j.toolspecification.schema.CityDataListSchema;
 import io.github.jtpadilla.example.langchain4j.toolspecification.schema.CityListSchema;
-import io.github.jtpadilla.example.langchain4j.toolspecification.impl.TemperatureEntry;
-import io.github.jtpadilla.example.langchain4j.toolspecification.impl.TemperatureQueryException;
-import io.github.jtpadilla.example.langchain4j.toolspecification.impl.TemperatureQueryResult;
 import io.github.jtpadilla.example.langchain4j.toolspecification.service.FilterAgent;
-import io.github.jtpadilla.example.langchain4j.toolspecification.service.QueryCitiesDataAgent;
 import io.github.jtpadilla.example.langchain4j.toolspecification.service.QueryCitiesAgent;
-import io.github.jtpadilla.example.util.GoogleModels;
-import io.helidon.config.Config;
+import io.github.jtpadilla.example.langchain4j.toolspecification.service.QueryCitiesDataAgent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToolDemo {
+public class TemperatureQueryServiceServiceImpl {
 
-    private static final String API_KEY = Config.global().get("gemini-api-key").asString().orElseThrow(
-            () -> new IllegalStateException("La clave de configuración 'gemini-api-key' es obligatoria"));
+    private final ChatModel chatModel;
 
-    static final ChatModel chatModel = GoogleAiGeminiChatModel.builder()
-            .apiKey(API_KEY)
-            .modelName(GoogleModels.geminiFlashLite())
-            .build();
-
-    static final ToolDemo service = new ToolDemo();
-
-    public static void main(String[] args) {
-        try {
-            final TemperatureQueryResult result = service.query(
-                    "Castellón",
-                    List.of("Burriana")
-            );
-            System.out.println(result);
-        } catch (TemperatureQueryException e) {
-            throw new RuntimeException(e);
-        }
-
+    public TemperatureQueryServiceServiceImpl(ChatModel chatModel) {
+        this.chatModel = chatModel;
     }
 
     public TemperatureQueryResult query(String provincia, List<String> ciudades) throws TemperatureQueryException {
