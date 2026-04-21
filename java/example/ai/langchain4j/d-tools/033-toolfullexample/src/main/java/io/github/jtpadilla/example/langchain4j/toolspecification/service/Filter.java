@@ -1,5 +1,6 @@
 package io.github.jtpadilla.example.langchain4j.toolspecification.service;
 
+import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.SystemMessage;
@@ -42,10 +43,10 @@ public class Filter {
         // Se inicializa la instancia de la tool con la lista de ciudades)
         final FilterLocationsTool filterLocationsTool = new FilterLocationsTool(ciudades);
 
-        final HashMap<String, ToolExecutor> tools = new HashMap<>(
+        final HashMap<ToolSpecification, ToolExecutor> tools = new HashMap<>(
                 Map.of(
-                        GetCurrentTimeTool.NAME, GetCurrentTimeTool.executor(),
-                        FilterLocationsTool.NAME, filterLocationsTool.executor()
+                        GetCurrentTimeTool.SPEC, GetCurrentTimeTool.executor(),
+                        FilterLocationsTool.SPEC, filterLocationsTool.executor()
                 )
         );
         FilterService service = AiServices.builder(FilterService.class)

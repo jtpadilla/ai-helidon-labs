@@ -25,6 +25,8 @@ public class ToolDemo {
     static final ChatModel chatModelSearch = GoogleAiGeminiChatModel.builder()
             .apiKey(API_KEY)
             .modelName(GoogleModels.geminiFlashLite())
+            .sendThinking(true)
+            .returnThinking(true)
             .allowGoogleSearch(true)
             .build();
 
@@ -32,6 +34,8 @@ public class ToolDemo {
     static final ChatModel chatModelNoSearch = GoogleAiGeminiChatModel.builder()
             .apiKey(API_KEY)
             .modelName(GoogleModels.geminiFlashLite())
+            .sendThinking(true)
+            .returnThinking(true)
             .build();
 
     public static void main(String[] args) {
