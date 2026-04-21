@@ -29,10 +29,7 @@ public class ToolDemo {
 
     public static void main(String[] args) {
         try {
-            final TemperatureQueryResult result = query(
-                    "Castellón",
-                    List.of("Burriana")
-            );
+            final TemperatureQueryResult result = query("Castellón", List.of("Burriana"));
             System.out.println(result);
         } catch (TemperatureQueryException e) {
             throw new RuntimeException(e);
