@@ -32,18 +32,20 @@ public class StructResult1 {
 
     public static void main(String[] args) {
 
+        JsonSchema jsonSchema = JsonSchema.builder()
+                .name("Person") // OpenAI requires specifying the name for the schema
+                .rootElement(JsonObjectSchema.builder() // see [1] below
+                        .addStringProperty("name")
+                        .addIntegerProperty("age")
+                        .addNumberProperty("height")
+                        .addBooleanProperty("married")
+                        .required("name", "age", "height", "married") // see [2] below
+                        .build())
+                .build();
+
         ResponseFormat responseFormat = ResponseFormat.builder()
                 .type(JSON) // type can be either TEXT (default) or JSON
-                .jsonSchema(JsonSchema.builder()
-                        .name("Person") // OpenAI requires specifying the name for the schema
-                        .rootElement(JsonObjectSchema.builder() // see [1] below
-                                .addStringProperty("name")
-                                .addIntegerProperty("age")
-                                .addNumberProperty("height")
-                                .addBooleanProperty("married")
-                                .required("name", "age", "height", "married") // see [2] below
-                                .build())
-                        .build())
+                .jsonSchema(jsonSchema)
                 .build();
 
         UserMessage userMessage = UserMessage.from("""
