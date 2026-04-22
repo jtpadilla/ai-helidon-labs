@@ -1,10 +1,8 @@
 package io.github.jtpadilla.example.langchain4j.toolfullexample2.service;
 
-import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.SystemMessage;
-import dev.langchain4j.service.tool.ToolExecutor;
 import dev.langchain4j.service.tool.ToolProvider;
 import dev.langchain4j.service.tool.ToolProviderResult;
 import io.github.jtpadilla.example.langchain4j.toolfullexample2.schema.CityDataListSchema;
@@ -12,9 +10,7 @@ import io.github.jtpadilla.example.langchain4j.toolfullexample2.tool.FilterLocat
 import io.github.jtpadilla.example.langchain4j.toolfullexample2.tool.GetCurrentTimeTool;
 import io.github.jtpadilla.example.util.SchemaException;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Filter {
