@@ -46,12 +46,11 @@ public class Filter {
         final FilterLocationsTool filterLocationsTool = new FilterLocationsTool(ciudades);
 
         // Se utiliza un provider que facilita la incorporacion de las tools.
-        ToolProvider toolProvider = (toolProviderRequest)->{
-            return ToolProviderResult.builder()
+        final ToolProvider toolProvider = (toolProviderRequest)->
+            ToolProviderResult.builder()
                     .add(GetCurrentTimeTool.SPEC, GetCurrentTimeTool.executor())
                     .add(FilterLocationsTool.SPEC, filterLocationsTool.executor())
                     .build();
-        };
 
         FilterService service = AiServices.builder(FilterService.class)
                 .chatModel(chatModel)
