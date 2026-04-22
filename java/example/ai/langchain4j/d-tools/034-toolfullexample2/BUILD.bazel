@@ -1,0 +1,50 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_import", "java_library", "java_test")
+
+java_library(
+    name = "schema-lib",
+    srcs = glob(["src/main/java/**/*.java"]),
+    resources = glob(["src/main/resources/**"]),
+    deps = [
+        "//java/example/ai/langchain4j/util",
+        "@maven//:com_google_code_gson_gson",
+        "@maven//:dev_langchain4j_langchain4j",
+        "@maven//:dev_langchain4j_langchain4j_agentic",
+        "@maven//:dev_langchain4j_langchain4j_core",
+        "@maven//:dev_langchain4j_langchain4j_google_ai_gemini",
+        "@maven//:io_helidon_config_helidon_config",
+        "@maven//:io_helidon_config_helidon_config_yaml",
+        "@maven//:org_jspecify_jspecify",
+    ],
+)
+
+java_binary(
+    name = "033-toolfullexample1",
+    main_class = "io.github.jtpadilla.example.langchain4j.toolfullexample1.ToolDemo",
+    visibility = ["//visibility:public"],
+    runtime_deps = [":schema-lib"],
+)
+
+java_test(
+    name = "SchemaTests",
+    srcs = glob(["src/test/java/io/github/jtpadilla/example/langchain4j/toolspecification/schema/**/*.java"]),
+    test_class = "io.github.jtpadilla.example.langchain4j.toolspecification.schema.SchemaAllTests",
+    deps = [
+        ":schema-lib",
+        "//java/example/ai/langchain4j/util",
+        "@maven//:com_google_code_gson_gson",
+        "@maven//:dev_langchain4j_langchain4j_core",
+    ],
+)
+
+java_test(
+    name = "ToolTests",
+    srcs = glob(["src/test/java/io/github/jtpadilla/example/langchain4j/toolspecification/tool/**/*.java"]),
+    test_class = "io.github.jtpadilla.example.langchain4j.toolspecification.tool.ToolAllTests",
+    deps = [
+        ":schema-lib",
+        "//java/example/ai/langchain4j/util",
+        "@maven//:com_google_code_gson_gson",
+        "@maven//:dev_langchain4j_langchain4j_core",
+        "@maven//:dev_langchain4j_langchain4j",
+    ],
+)
