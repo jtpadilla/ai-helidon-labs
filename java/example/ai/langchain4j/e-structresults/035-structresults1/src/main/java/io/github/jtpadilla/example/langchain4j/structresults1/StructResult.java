@@ -14,7 +14,7 @@ import io.helidon.config.Config;
 
 import static dev.langchain4j.model.chat.request.ResponseFormatType.JSON;
 
-public class StructResult1 {
+public class StructResult {
 
     private static final Gson gson = new Gson();
 

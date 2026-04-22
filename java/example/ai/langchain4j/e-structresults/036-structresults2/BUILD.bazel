@@ -3,7 +3,7 @@ load("@rules_java//java:defs.bzl", "java_binary", "java_import", "java_library",
 java_binary(
     name = "033-toolfullexample2",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "io.github.jtpadilla.example.langchain4j.structresults1.StructResult",
+    main_class = "io.github.jtpadilla.example.langchain4j.structresults2.StructResult",
     visibility = ["//visibility:public"],
     resources = glob(["src/main/resources/**"]),
     deps = [
